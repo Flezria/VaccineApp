@@ -65,12 +65,14 @@
                 />
             <Button
                 Text="Login!"
+                TextColor="White"
                 BackgroundColor="#016A6F"
                 />
         </StackLayout>
 
         <Button
             Text="Opret konto"
+            TextColor="White"
             Command="{Binding NavToRegister}"
             BackgroundColor="#016A6F"
             Margin="5, 0, 5, 5"
