@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using VaccineApp.View;
+using System.ComponentModel;
 
 namespace VaccineApp.ViewModel
 {
-    class LoginViewModel
+    class LoginViewModel : INotifyPropertyChanged
     {
         #region Properties
         //Navigation prop
         private INavigation navigation;
+
+
         //Command prop til navigation knap
         public ICommand NavToRegister { get; set; }
 
@@ -29,5 +32,11 @@ namespace VaccineApp.ViewModel
         {
             await navigation.PushAsync(new RegisterPage());
         }
+
+        #region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        
+        #endregion
     }
 }

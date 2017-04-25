@@ -15,6 +15,7 @@ namespace VaccineApp.View
         public RegisterPage()
         {
             InitializeComponent();
+            BindingContext = new ViewModel.RegisterViewModel(Navigation);
         }
     }
 }
