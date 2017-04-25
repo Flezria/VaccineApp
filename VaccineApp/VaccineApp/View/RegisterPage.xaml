@@ -62,39 +62,45 @@
 
         <StackLayout Padding="20" Grid.Row="2">
             <Entry
+                Text="{Binding Email, Mode=TwoWay}"
                 Placeholder="E-mail"
                 PlaceholderColor="Gray"
                 TextColor="Black"
                 />
             <Entry
+                Text="{Binding FirstName, Mode=TwoWay}"
                 Placeholder="Fornavn"
                 PlaceholderColor="Gray"
                 TextColor="Black"
                 />
             <Entry
+                Text="{Binding SurName, Mode=TwoWay}"
                 Placeholder="Efternavn"
                 PlaceholderColor="Gray"
                 TextColor="Black"
                 />
             <Entry
+                Text="{Binding MobileNr, Mode=TwoWay}"
                 Placeholder="Mobil nummer"
                 PlaceholderColor="Gray"
                 TextColor="Black"
                 />
             <Entry
+                Text="{Binding Password, Mode=TwoWay}"
                 Placeholder="Kodeord"
                 IsPassword="True"
                 PlaceholderColor="Gray"
                 TextColor="Black"
                 />
             <Entry
+                Text="{Binding PasswordConfirm, Mode=TwoWay}"
                 Placeholder="Kodeord igen"
                 IsPassword="True"
                 PlaceholderColor="Gray"
                 TextColor="Black"
                 />
             <Label
-                Text="Du skal udfylde alle felter"
+                Text="{Binding ErrorMessage}"
                 FontSize="18"
                 TextColor="#F56161"
                 />

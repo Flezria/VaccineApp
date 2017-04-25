@@ -43,6 +43,7 @@
             <Frame
                     Opacity="0.8"
                     BackgroundColor="White"
+                    CornerRadius="0"
                     />
             <Frame
                     Opacity="0.8"
