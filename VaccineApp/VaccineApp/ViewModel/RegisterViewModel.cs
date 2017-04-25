@@ -84,6 +84,8 @@ namespace VaccineApp.ViewModel
                 }
         }
 
+        public static bool IsRegisterComplete { get; set; }
+
         public Webservice wb { get; set; }
 
         #endregion
@@ -100,7 +102,13 @@ namespace VaccineApp.ViewModel
             if(await CheckUser() == true)
             {
                 Users tempUser = new Users(0, Password, int.Parse(MobileNr), FirstName, SurName, Email, null);
-                await App.Current.MainPage.DisplayAlert("Title", $"{tempUser.user_id}\n{tempUser.email}\n{tempUser.name} + {tempUser.surname}\n{tempUser.mobile}\n{tempUser.password}", "Yes");
+
+                if(await wb.AddUser(tempUser) == true)
+                {
+                    IsRegisterComplete = true;
+                    await navigation.PopToRootAsync();
+
+                }
             }
         }
 

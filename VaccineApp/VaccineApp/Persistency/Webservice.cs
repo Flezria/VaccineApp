@@ -5,13 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using VaccineApp.Model;
+using System.Net.Http.Formatting;
+using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace VaccineApp.Persistency
 {
     class Webservice
     {
         HttpClient client = new HttpClient();
-        const String ServerUrl = "http://vaccappwebservice20170424033719.azurewebsites.net";
+        const String ServerUrl = "http://vaccappwebservice20170424033719.azurewebsites.net/";
 
         
         public async Task<bool> CheckIfEmailIsTaken(String email)
@@ -33,6 +37,34 @@ namespace VaccineApp.Persistency
                             return false;
                     }
                 }
+            return false;
+        }
+
+        public async Task<bool> AddUser(Users user)
+        {
+            client.BaseAddress = new Uri(ServerUrl);
+            client.DefaultRequestHeaders.Clear();
+
+            try
+            {
+                String JsonUser = JsonConvert.SerializeObject(user);
+                var content = new StringContent(JsonUser, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("api/users", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+
             return false;
         }
 

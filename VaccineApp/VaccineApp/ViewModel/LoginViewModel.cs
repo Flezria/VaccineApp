@@ -16,9 +16,17 @@ namespace VaccineApp.ViewModel
         //Navigation prop
         private INavigation navigation;
 
-
         //Command prop til navigation knap
         public ICommand NavToRegister { get; set; }
+
+        private String _responseMessage;
+        public String ResponseMessage
+        {
+            get { return _responseMessage; }
+            set { _responseMessage = value;
+                OnPropertyChanged(nameof(ResponseMessage));
+                }
+        }
 
         #endregion
 
@@ -26,12 +34,22 @@ namespace VaccineApp.ViewModel
         {
             this.navigation = navigation;
             this.NavToRegister = new Command(async() => await NavigateToRegister());
+
+            //Check hvis vi kommer fra RegisterPage og har lavet en ny bruger
+            if (RegisterViewModel.IsRegisterComplete == true)
+            {
+                ResponseMessage = "Oprettelse fuldført! Du kan nu logge ind";
+                RegisterViewModel.IsRegisterComplete = false;
+            }
         }
 
         private async Task NavigateToRegister()
         {
             await navigation.PushAsync(new RegisterPage());
+
         }
+
+
 
         #region INotifyPropertyChanged
 

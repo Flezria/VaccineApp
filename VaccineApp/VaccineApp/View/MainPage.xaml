@@ -69,6 +69,12 @@
                 TextColor="White"
                 BackgroundColor="#016A6F"
                 />
+            <Label
+                Text="{Binding ResponseMessage}"
+                HorizontalOptions="Center"
+                FontSize="18"
+                TextColor="Green"
+                />
         </StackLayout>
 
         <Button

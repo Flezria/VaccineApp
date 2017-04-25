@@ -12,6 +12,10 @@ namespace VaccineApp
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
             BindingContext = new ViewModel.LoginViewModel(Navigation);
         }
     }
