@@ -5,7 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using VaccineApp.Persistency;
 using Xamarin.Forms;
+using VaccineApp.Model;
+using Windows.UI.Popups;
 
 namespace VaccineApp.ViewModel
 {
@@ -45,8 +48,8 @@ namespace VaccineApp.ViewModel
                 }
         }
 
-        private int _mobileNr;
-        public int MobileNr
+        private String _mobileNr;
+        public String MobileNr
         {
             get { return _mobileNr; }
             set { _mobileNr = value;
@@ -63,8 +66,8 @@ namespace VaccineApp.ViewModel
                 }
         }
 
-        private int _passwordConfirm ;
-        public int PasswordConfirm
+        private string _passwordConfirm ;
+        public string PasswordConfirm
         {
             get { return _passwordConfirm ; }
             set { _passwordConfirm  = value;
@@ -81,22 +84,53 @@ namespace VaccineApp.ViewModel
                 }
         }
 
+        public Webservice wb { get; set; }
+
         #endregion
 
         public RegisterViewModel(INavigation navigation)
         {
+            wb = new Webservice();
             this.navigation = navigation;
             this.RegisterCommand = new Command(RegisterUser);
         }
 
-        private void RegisterUser()
+        private async void RegisterUser()
         {
-
+            if(await CheckUser() == true)
+            {
+                Users tempUser = new Users(0, Password, int.Parse(MobileNr), FirstName, SurName, Email, null);
+                await App.Current.MainPage.DisplayAlert("Title", $"{tempUser.user_id}\n{tempUser.email}\n{tempUser.name} + {tempUser.surname}\n{tempUser.mobile}\n{tempUser.password}", "Yes");
+            }
         }
 
-        private void CheckUser()
+        private async Task<bool> CheckUser()
         {
+            if((String.IsNullOrWhiteSpace(Email)) || (String.IsNullOrWhiteSpace(FirstName)) || (String.IsNullOrWhiteSpace(SurName)) || (String.IsNullOrWhiteSpace(MobileNr)) || (String.IsNullOrWhiteSpace(Password)) || (String.IsNullOrWhiteSpace(PasswordConfirm))) 
+            {
+                ErrorMessage = "Du skal udfylde alle felter";
+                return false;
+            }
 
+            if(Password != PasswordConfirm)
+            {
+                ErrorMessage = "Kodeord er ikke ens";
+                return false;
+            }
+
+            if(!Email.Contains("@"))
+            {
+                ErrorMessage = "Du skal skrive en rigtig email";
+                return false;
+            }
+
+            if (await wb.CheckIfEmailIsTaken(Email) == true)
+            {
+                ErrorMessage = "Denne email er allerede i brug";
+                return false;
+            }
+            ErrorMessage = "";
+            return true;
         }
 
         #region INotifyPropertyChanged

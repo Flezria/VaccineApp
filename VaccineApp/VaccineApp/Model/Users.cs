@@ -12,7 +12,7 @@ namespace VaccineApp.Model
 
         public int user_id { get; set; }
 
-        public int password { get; set; }
+        public String password { get; set; }
 
         public int mobile { get; set; }
 
@@ -26,7 +26,7 @@ namespace VaccineApp.Model
 
         #endregion
 
-        public Users(int userid, int password, int mobile, string name, string surname, string email, string apiKey)
+        public Users(int userid, String password, int mobile, string name, string surname, string email, string apiKey)
         {
             this.user_id = userid;
             this.password = password;
