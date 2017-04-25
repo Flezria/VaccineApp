@@ -13,7 +13,11 @@ namespace VaccineApp
         {
             InitializeComponent();
 
-            MainPage = new VaccineApp.MainPage();
+            MainPage = new NavigationPage(new MainPage())
+            {
+                BarBackgroundColor = Color.FromHex("#016A6F"),
+            };
+            
         }
 
         protected override void OnStart()

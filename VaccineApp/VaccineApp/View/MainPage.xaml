@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:VaccineApp"
+             x:Class="VaccineApp.MainPage"
+             Title="Login">
+
+    <Grid BackgroundColor="#E5E5E5">
+
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Label Text="Login"
+               FontSize="48"
+               TextColor="#016A6F"
+               Margin="0, 50, 0, 75"
+               Grid.ColumnSpan="2"
+               Grid.Row="2"
+               VerticalOptions="Center" 
+               HorizontalOptions="Center">
+
+            <Label.FontFamily>
+                <OnPlatform x:TypeArguments="x:String">
+                    <OnPlatform.iOS></OnPlatform.iOS>
+                    <OnPlatform.Android>monofonto.ttf#monofonto</OnPlatform.Android>
+                    <OnPlatform.WinPhone></OnPlatform.WinPhone>
+                </OnPlatform>
+            </Label.FontFamily>
+        </Label>
+
+        <StackLayout Padding="20" Grid.ColumnSpan="2" Grid.Row="3">
+            <Frame
+                    Opacity="0.8"
+                    BackgroundColor="White"
+                    />
+            <Frame
+                    Opacity="0.8"
+                    BackgroundColor="White"
+                    Margin="0, 6, 0, 0"
+                    />
+        </StackLayout>
+
+        <StackLayout Padding="20" Grid.ColumnSpan="2" Grid.Row="3">
+            <Entry
+                Placeholder="E-mail"
+                PlaceholderColor="Gray"
+                TextColor="Black"
+                />
+            <Entry
+                Placeholder="Password"
+                PlaceholderColor="Gray"
+                IsPassword="True"
+                TextColor="Black"
+                />
+            <Button
+                Text="Login!"
+                BackgroundColor="#016A6F"
+                />
+        </StackLayout>
+
+        <Button
+            Text="Opret konto"
+            Command="{Binding NavToRegister}"
+            BackgroundColor="#016A6F"
+            Margin="5, 0, 5, 5"
+            Grid.ColumnSpan="2"
+            Grid.Row="4"
+            />
+
+    </Grid>
+
+</ContentPage>
