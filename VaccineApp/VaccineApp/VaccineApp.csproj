@@ -38,7 +38,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Persistency\Webservice.cs" />
+	<Compile Include="Model\UserChilds.cs" />
+    <Compile Include="Model\Users.cs" />
+    <Compile Include="Model\Vaccinations.cs" />
+    <Compile Include="Model\VaccineInfo.cs" />
+    <Compile Include="Model\VaccinePrograms.cs" />
+	<Compile Include="Persistency\Webservice.cs" />
+
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="View\MainPage.xaml.cs">
@@ -63,6 +69,7 @@
     <Folder Include="Common\" />
     <Folder Include="Handler\" />
     <Folder Include="Model\" />
+    <Folder Include="Persistency\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\RegisterPage.xaml">
