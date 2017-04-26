@@ -54,17 +54,20 @@
 
         <StackLayout Padding="20" Grid.ColumnSpan="2" Grid.Row="3">
             <Entry
+                Text="{Binding Email, Mode=TwoWay}"
                 Placeholder="E-mail"
                 PlaceholderColor="Gray"
                 TextColor="Black"
                 />
             <Entry
+                Text="{Binding Password, Mode=TwoWay}"
                 Placeholder="Password"
                 PlaceholderColor="Gray"
                 IsPassword="True"
                 TextColor="Black"
                 />
             <Button
+                Command="{Binding LoginCommand}"
                 Text="Login!"
                 TextColor="White"
                 BackgroundColor="#016A6F"

@@ -86,13 +86,13 @@ namespace VaccineApp.ViewModel
 
         public static bool IsRegisterComplete { get; set; }
 
-        public Webservice wb { get; set; }
+        public Webservice services { get; set; }
 
         #endregion
 
         public RegisterViewModel(INavigation navigation)
         {
-            wb = new Webservice();
+            services = new Webservice();
             this.navigation = navigation;
             this.RegisterCommand = new Command(RegisterUser);
         }
@@ -103,7 +103,7 @@ namespace VaccineApp.ViewModel
             {
                 Users tempUser = new Users(0, Password, int.Parse(MobileNr), FirstName, SurName, Email, null);
 
-                if(await wb.AddUser(tempUser) == true)
+                if(await services.AddUser(tempUser) == true)
                 {
                     IsRegisterComplete = true;
                     await navigation.PopToRootAsync();
@@ -132,7 +132,7 @@ namespace VaccineApp.ViewModel
                 return false;
             }
 
-            if (await wb.CheckIfEmailIsTaken(Email) == true)
+            if (await services.CheckIfEmailIsTaken(Email) == true)
             {
                 ErrorMessage = "Denne email er allerede i brug";
                 return false;
