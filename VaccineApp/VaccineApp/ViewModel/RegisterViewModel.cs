@@ -8,7 +8,6 @@ using System.Windows.Input;
 using VaccineApp.Persistency;
 using Xamarin.Forms;
 using VaccineApp.Model;
-using Windows.UI.Popups;
 
 namespace VaccineApp.ViewModel
 {
