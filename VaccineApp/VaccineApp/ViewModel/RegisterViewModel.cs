@@ -100,7 +100,7 @@ namespace VaccineApp.ViewModel
         {
             if(await CheckUser() == true)
             {
-                Users tempUser = new Users(0, Password, int.Parse(MobileNr), FirstName, SurName, Email, null);
+                Users tempUser = new Users(0, Password, int.Parse(MobileNr.Trim()), FirstName.Trim(), SurName.Trim(), Email.Trim(), null);
 
                 if(await services.AddUser(tempUser) == true)
                 {
@@ -131,7 +131,7 @@ namespace VaccineApp.ViewModel
                 return false;
             }
 
-            if (await services.CheckIfEmailIsTaken(Email) == true)
+            if (await services.CheckIfEmailIsTaken(Email.Trim()) == true)
             {
                 ErrorMessage = "Denne email er allerede i brug";
                 return false;

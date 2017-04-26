@@ -106,7 +106,7 @@ namespace VaccineApp.ViewModel
                 return false;
             }
 
-            bool WSLogin = await services.Login(Email, Password);
+            bool WSLogin = await services.Login(Email.Trim(), Password);
 
             if (WSLogin == true)
             {

@@ -24,9 +24,11 @@ namespace VaccineApp.Persistency
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+            try
+            {
                 var result = client.GetAsync($"EmailCheck/{email}/").Result;
 
-                if(result.IsSuccessStatusCode)
+                if (result.IsSuccessStatusCode)
                 {
                     var EmailChecked = await result.Content.ReadAsStringAsync();
                     switch (EmailChecked)
@@ -37,6 +39,13 @@ namespace VaccineApp.Persistency
                             return false;
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                await App.Current.MainPage.DisplayAlert("Internet error", "Kan ikke forbinde til internettet", "OK");
+                Debug.WriteLine(e);
+            }
+
             return false;
         }
 
@@ -74,20 +83,28 @@ namespace VaccineApp.Persistency
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var result = client.GetAsync($"Login/{email}/{password}").Result;
-
-            if (result.IsSuccessStatusCode)
+            try
             {
-                var LoginCheck = await result.Content.ReadAsStringAsync();
-                switch (LoginCheck)
+
+                var result = client.GetAsync($"Login/{email}/{password}").Result;
+
+                if (result.IsSuccessStatusCode)
                 {
-                    case "true":
-                        return true;
-                    case "false":
-                        return false;
+                    var LoginCheck = await result.Content.ReadAsStringAsync();
+                    switch (LoginCheck)
+                    {
+                        case "true":
+                            return true;
+                        case "false":
+                            return false;
+                    }
                 }
             }
-
+            catch (Exception e)
+            {
+                await App.Current.MainPage.DisplayAlert("Internet error", "Kan ikke forbinde til internettet", "OK");
+                Debug.WriteLine(e);
+            }
             return false;
         }
 
