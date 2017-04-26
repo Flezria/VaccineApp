@@ -17,7 +17,7 @@ namespace VaccineApp.Persistency
         HttpClient client = new HttpClient();
         const String ServerUrl = "http://vaccappwebservice20170424033719.azurewebsites.net/";
 
-        
+        #region User services
         public async Task<bool> CheckIfEmailIsTaken(String email)
         {
                 client.BaseAddress = new Uri(ServerUrl);
@@ -91,6 +91,35 @@ namespace VaccineApp.Persistency
             return false;
         }
 
+        #endregion
+
+        public async Task<bool> AddChild(UserChilds child)
+        {
+            client.BaseAddress = new Uri(ServerUrl);
+            client.DefaultRequestHeaders.Clear();
+
+            try
+            {
+                String JsonUser = JsonConvert.SerializeObject(child);
+                var content = new StringContent(JsonUser, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("api/user_childs", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+
+            return false;
+        }
     }
 }
 
