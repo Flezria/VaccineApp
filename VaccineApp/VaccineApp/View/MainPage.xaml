@@ -73,7 +73,7 @@
                 Text="{Binding ResponseMessage}"
                 HorizontalOptions="Center"
                 FontSize="18"
-                TextColor="Green"
+                TextColor="{Binding ResponseColor}"
                 />
         </StackLayout>
 

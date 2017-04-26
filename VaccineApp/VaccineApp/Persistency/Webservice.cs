@@ -24,7 +24,7 @@ namespace VaccineApp.Persistency
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var result = client.GetAsync($"EmailCheck/{email}").Result;
+                var result = client.GetAsync($"EmailCheck/{email}/").Result;
 
                 if(result.IsSuccessStatusCode)
                 {
@@ -63,6 +63,29 @@ namespace VaccineApp.Persistency
             catch (Exception e)
             {
                 Debug.WriteLine(e);
+            }
+
+            return false;
+        }
+
+        public async Task<bool> Login(String email, String password)
+        {
+            client.BaseAddress = new Uri(ServerUrl);
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var result = client.GetAsync($"Login/{email}/{password}").Result;
+
+            if (result.IsSuccessStatusCode)
+            {
+                var LoginCheck = await result.Content.ReadAsStringAsync();
+                switch (LoginCheck)
+                {
+                    case "true":
+                        return true;
+                    case "false":
+                        return false;
+                }
             }
 
             return false;

@@ -28,16 +28,28 @@ namespace VaccineApp.ViewModel
                 }
         }
 
+        private String _responseColor;
+        public String ResponseColor
+        {
+            get { return _responseColor; }
+            set { _responseColor = value;
+                OnPropertyChanged(nameof(ResponseColor));
+            }
+        }
+
+
         #endregion
 
         public LoginViewModel(INavigation navigation)
         {
+            ResponseColor = "#E5E5E5";
             this.navigation = navigation;
             this.NavToRegister = new Command(async() => await NavigateToRegister());
 
             //Check hvis vi kommer fra RegisterPage og har lavet en ny bruger
             if (RegisterViewModel.IsRegisterComplete == true)
             {
+                ResponseColor = "#4EC44E";
                 ResponseMessage = "Oprettelse fuldført! Du kan nu logge ind";
                 RegisterViewModel.IsRegisterComplete = false;
             }
