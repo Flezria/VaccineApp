@@ -84,7 +84,7 @@ namespace VaccineApp.ViewModel
 
         private async Task NavigateToRegister()
         {
-            await navigation.PushModalAsync(new RegisterPage());
+            await navigation.PushAsync(new RegisterPage());
         }
 
         private async Task LoginUser()
