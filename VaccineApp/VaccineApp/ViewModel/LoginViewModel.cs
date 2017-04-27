@@ -62,7 +62,6 @@ namespace VaccineApp.ViewModel
             }
         }
 
-
         #endregion
 
         public LoginViewModel(INavigation navigation)
@@ -72,7 +71,7 @@ namespace VaccineApp.ViewModel
             this.NavToRegister = new Command(async() => await NavigateToRegister());
 
             this.services = new Webservice();
-            this.LoginCommand = new Command(LoginUser);
+            this.LoginCommand = new Command(async() => await LoginUser());
 
             //Check hvis vi kommer fra RegisterPage og har lavet en ny bruger
             if (RegisterViewModel.IsRegisterComplete == true)
@@ -85,42 +84,52 @@ namespace VaccineApp.ViewModel
 
         private async Task NavigateToRegister()
         {
-            await navigation.PushAsync(new RegisterPage());
-
+            await navigation.PushModalAsync(new RegisterPage());
         }
 
-        private async void LoginUser()
+        private async Task LoginUser()
         {
+
             if(await CheckLoginCredentials() == true)
             {
-                await App.Current.MainPage.DisplayAlert("Login OK", "Du blev logget ind", "ok");
+                FrontPageMaster fpm = new FrontPageMaster();
+                fpm.Master = new FrontPageMasterMenu();
+                fpm.Detail = new NavigationPage(new FrontPageDetail())
+                {
+                    BarBackgroundColor = Color.FromHex("#016A6F"),
+                };
+                Application.Current.MainPage = fpm;
+                
             }
         }
 
         private async Task<bool> CheckLoginCredentials()
         {
-            if((String.IsNullOrWhiteSpace(Email)) || (String.IsNullOrWhiteSpace(Password)))
-            {
-                ResponseColor = "#F56161";
-                ResponseMessage = "Du skal udfylde begge felter";
-                return false;
-            }
+                if ((String.IsNullOrWhiteSpace(Email)) || (String.IsNullOrWhiteSpace(Password)))
+                {
+                    ResponseColor = "#F56161";
+                    ResponseMessage = "Du skal udfylde begge felter";
+                    return false;
+                }
 
-            bool WSLogin = await services.Login(Email.Trim(), Password);
+                String WSLogin = await services.Login(Email.Trim(), Password);
 
-            if (WSLogin == true)
-            {
-                ResponseMessage = "";
-                return true;
-            }
-            
-            if(WSLogin == false)
-            {
-                ResponseColor = "#F56161";
-                ResponseMessage = "Email eller kodeord er forkert";
-                return false;
-            }
+                //Dette kan eventuelt blive lavet til en switch i stedet.
+                if ((WSLogin != null) && (WSLogin != "\"false\""))
+                {
+                    if(!Application.Current.Properties.ContainsKey("api_key")) {
+                        Application.Current.Properties["api_key"] = WSLogin;
+                    }
+                    ResponseMessage = "";
+                    return true;
+                }
 
+                if (WSLogin == "\"false\"")
+                {   
+                    ResponseColor = "#F56161";
+                    ResponseMessage = "Email eller kodeord er forkert";
+                    return false;
+                }
 
             ResponseMessage = "Server error!";
             return false;
@@ -129,8 +138,8 @@ namespace VaccineApp.ViewModel
         #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
+        protected virtual void OnPropertyChanged(string propertyName = null)
+        {   
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion

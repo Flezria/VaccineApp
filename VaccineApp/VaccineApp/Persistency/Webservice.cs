@@ -77,7 +77,7 @@ namespace VaccineApp.Persistency
             return false;
         }
 
-        public async Task<bool> Login(String email, String password)
+        public async Task<String> Login(String email, String password)
         {
             client.BaseAddress = new Uri(ServerUrl);
             client.DefaultRequestHeaders.Clear();
@@ -91,12 +91,13 @@ namespace VaccineApp.Persistency
                 if (result.IsSuccessStatusCode)
                 {
                     var LoginCheck = await result.Content.ReadAsStringAsync();
-                    switch (LoginCheck)
+                    if(LoginCheck != null)
                     {
-                        case "true":
-                            return true;
-                        case "false":
-                            return false;
+                        return LoginCheck;
+                    }
+                    else
+                    {
+                        return "false";
                     }
                 }
             }
@@ -105,7 +106,8 @@ namespace VaccineApp.Persistency
                 await App.Current.MainPage.DisplayAlert("Internet error", "Kan ikke forbinde til internettet", "OK");
                 Debug.WriteLine(e);
             }
-            return false;
+
+            return null;
         }
 
         #endregion

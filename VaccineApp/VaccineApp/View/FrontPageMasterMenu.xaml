@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VaccineApp.View.FrontPageMasterMenu"
+             Title="FrontPageMasterMenu"
+             Icon="slideout.png"
+             BackgroundColor="#E5E5E5">
+            <StackLayout Orientation="Vertical">
+                    <StackLayout BackgroundColor="#016A6F" HeightRequest="100" VerticalOptions="Fill" HorizontalOptions="Fill">
+                        <Label Text="Velkommen NAVN HER"
+                        FontSize="16"
+                        VerticalOptions="CenterAndExpand"
+                        TextColor="White"
+                        HorizontalOptions="Center" />
+                    </StackLayout>
+
+                    <ListView
+                        RowHeight="60"
+                        SeparatorVisibility="Default"
+                        SeparatorColor="#016A6F"
+                        ItemsSource="{Binding HamburgerMenu,Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedMenuItem, Mode=TwoWay}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                    <ViewCell>
+                                    <StackLayout
+                                        VerticalOptions="FillAndExpand"
+                                        Orientation="Horizontal"
+                                        BackgroundColor="#E5E5E5"
+                                        Padding="20, 10, 0, 10"
+                                        Spacing="20">
+                                        <Image
+                                            Source="{Binding Icon}"
+                                            WidthRequest="40"
+                                            HeightRequest="40"
+                                            VerticalOptions="Center"
+                                            />
+                                        <Label
+                                            Text="{Binding Title}"
+                                            FontSize="Medium"
+                                            VerticalOptions="Center"
+                                            TextColor="Black"
+                                            />
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+</ContentPage>
