@@ -19,7 +19,6 @@ namespace VaccineApp.View
         public FrontPageMasterMenu()
         {
             InitializeComponent();
-            BindingContext = new ViewModel.FrontPageMenuViewModel(Navigation);
         }
     }
 }

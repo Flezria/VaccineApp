@@ -19,6 +19,7 @@ namespace VaccineApp.View
         public FrontPageDetail()
         {
             InitializeComponent();
+            
         }
     }
 

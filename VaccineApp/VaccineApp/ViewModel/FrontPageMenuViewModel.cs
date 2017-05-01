@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using VaccineApp.View;
 using Xamarin.Forms;
-using VaccineApp.Common;
+using VaccineApp.Model;
+using VaccineApp.Services;
 
 namespace VaccineApp.ViewModel
 {
@@ -15,8 +16,9 @@ namespace VaccineApp.ViewModel
     {
 
         #region Properties
-        public INavigation Navigation { get; set; }
+
         public List<MasterMenuItem> HamburgerMenu { get; set; }
+        public NavigationService NavService { get; set; }
 
         private MasterMenuItem _selectedMenuItem;
         public MasterMenuItem SelectedMenuItem
@@ -24,41 +26,56 @@ namespace VaccineApp.ViewModel
             get { return _selectedMenuItem; }
             set { _selectedMenuItem = value;
                 OnPropertyChanged(nameof(SelectedMenuItem));
-                //Navigate efter hvad der er selected
-                DoNavigation();
+
+                if(SelectedMenuItem != null)
+                    DoNavigation();
             }
         }
+        public MasterMenuItem Filler { get; set; }
 
         #endregion
-
-        public FrontPageMenuViewModel(INavigation Navigation)
+    
+        public FrontPageMenuViewModel()
         {
-            this.Navigation = Navigation;
+            SelectedMenuItem = new MasterMenuItem();
+
+            //Der skal findes en bedre løsning end dette Filler object.
+            Filler = new MasterMenuItem() { Title = "Fill", Icon = "icon.png", TargetPage = "Fill"};
+
+            NavService = new NavigationService();
+
             HamburgerMenu = new List<MasterMenuItem>();
             AddMenuItems();
 
         }
 
-        private void DoNavigation()
+        private async void DoNavigation()
         {
+            switch(SelectedMenuItem.TargetPage)
+            {
+                case "AddChildPage":
+                    await NavService.GotoPageAsync(NavigationService.AvailablePages.AddChildPage);
+                    SelectedMenuItem = Filler;
+                    break;
+                case "MainPage":
+                    await NavService.GotoPageAsync(NavigationService.AvailablePages.MainPage);
+                    SelectedMenuItem = Filler;
+                    break;
+            }
+
             //For testing properties api_key
-            if(SelectedMenuItem.Title == "Tilføj barn")
+            if (SelectedMenuItem.Title == "Unknown")
             {
                 Application.Current.Properties.Clear();
             }
         }
 
-        private async void AddChildNav()
-        {
-            await Navigation.PushAsync(new AddChildPage());
-        }
-
         private void AddMenuItems()
         {
-            HamburgerMenu.Add(new MasterMenuItem() { Title = "Tilføj barn", Icon = "icon.png", TargetPage = typeof(AddChildPage)});
-            HamburgerMenu.Add(new MasterMenuItem() { Title = "Indstillinger", Icon = "icon.png", TargetPage = typeof(AddChildPage) });
-            HamburgerMenu.Add(new MasterMenuItem() { Title = "DerpTown", Icon = "icon.png", TargetPage = typeof(AddChildPage) });
-            HamburgerMenu.Add(new MasterMenuItem() { Title = "Unknown", Icon = "icon.png", TargetPage = typeof(AddChildPage) });
+            HamburgerMenu.Add(new MasterMenuItem() { Title = "Tilføj barn", Icon = "icon.png", TargetPage = "AddChildPage" });
+            HamburgerMenu.Add(new MasterMenuItem() { Title = "Indstillinger", Icon = "icon.png", TargetPage = "MainPage" });
+            HamburgerMenu.Add(new MasterMenuItem() { Title = "DerpTown", Icon = "icon.png", TargetPage = "Fill" });
+            HamburgerMenu.Add(new MasterMenuItem() { Title = "Unknown", Icon = "icon.png", TargetPage = "Fill" });
         }
 
         #region INotifyPropertyChanged

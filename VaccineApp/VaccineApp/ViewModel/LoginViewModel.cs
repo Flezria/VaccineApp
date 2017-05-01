@@ -98,6 +98,7 @@ namespace VaccineApp.ViewModel
                 {
                     BarBackgroundColor = Color.FromHex("#016A6F"),
                 };
+
                 Application.Current.MainPage = fpm;
                 
             }

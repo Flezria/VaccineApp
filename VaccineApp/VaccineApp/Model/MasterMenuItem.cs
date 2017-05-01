@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VaccineApp.Common
+namespace VaccineApp.Model
 {
     class MasterMenuItem
     {
+
         public String Title { get; set; }
         public String Icon { get; set; }
-        public Type TargetPage { get; set; }
+        public String TargetPage { get; set; }
 
     }
 }

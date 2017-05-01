@@ -21,12 +21,15 @@ namespace VaccineApp
             // Handle when your app starts
             if(Application.Current.Properties.ContainsKey("api_key"))
             {
+
+
                 FrontPageMaster fpm = new FrontPageMaster();
                 fpm.Master = new FrontPageMasterMenu();
                 fpm.Detail = new NavigationPage(new FrontPageDetail())
                 {
                     BarBackgroundColor = Color.FromHex("#016A6F"),
                 };
+
                 MainPage = fpm;
             }
             else

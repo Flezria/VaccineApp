@@ -38,13 +38,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Common\MasterMenuItem.cs" />
+    <Compile Include="Model\MasterMenuItem.cs" />
     <Compile Include="Model\UserChilds.cs" />
     <Compile Include="Model\Users.cs" />
     <Compile Include="Model\Vaccinations.cs" />
     <Compile Include="Model\VaccineInfo.cs" />
     <Compile Include="Model\VaccinePrograms.cs" />
     <Compile Include="Persistency\Webservice.cs" />
+    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="ViewModel\FrontPageMenuViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
