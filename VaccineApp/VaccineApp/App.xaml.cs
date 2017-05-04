@@ -22,7 +22,6 @@ namespace VaccineApp
             if(Application.Current.Properties.ContainsKey("api_key"))
             {
 
-
                 FrontPageMaster fpm = new FrontPageMaster();
                 fpm.Master = new FrontPageMasterMenu();
                 fpm.Detail = new NavigationPage(new FrontPageDetail())

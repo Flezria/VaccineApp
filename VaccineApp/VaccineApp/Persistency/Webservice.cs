@@ -31,11 +31,14 @@ namespace VaccineApp.Persistency
                 if (result.IsSuccessStatusCode)
                 {
                     var EmailChecked = await result.Content.ReadAsStringAsync();
-                    switch (EmailChecked)
+                    var EmailCheckDeserialize = JsonConvert.DeserializeObject(EmailChecked);
+                    var EmailCheckedBool = (bool)EmailCheckDeserialize;
+
+                    switch (EmailCheckedBool)
                     {
-                        case "true":
+                        case true:
                             return true;
-                        case "false":
+                        case false:
                             return false;
                     }
                 }
@@ -91,9 +94,12 @@ namespace VaccineApp.Persistency
                 if (result.IsSuccessStatusCode)
                 {
                     var LoginCheck = await result.Content.ReadAsStringAsync();
-                    if(LoginCheck != null)
+                    var LoginCheckDeserialize = JsonConvert.DeserializeObject(LoginCheck);
+                    var LoginCheckString = (string)LoginCheckDeserialize;
+
+                    if(LoginCheckString != null)
                     {
-                        return LoginCheck;
+                        return LoginCheckString;
                     }
                     else
                     {

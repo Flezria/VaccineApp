@@ -10,6 +10,7 @@ namespace VaccineApp.Services
 {
     class NavigationService
     {
+        //Enum for de pages man kan navigere til - skal være identisk med navn på .xaml filen.
         public enum AvailablePages
         {
             AddChildPage,
@@ -24,7 +25,8 @@ namespace VaccineApp.Services
             {
                 case AvailablePages.AddChildPage:
                     mdPage.IsPresented = false;
-                    await mdPage.Detail.Navigation.PushAsync(new AddChildPage());
+                    var AddChild = new AddChildPage();
+                    await mdPage.Detail.Navigation.PushAsync(AddChild);
                     break;
                 case AvailablePages.MainPage:
                     mdPage.IsPresented = false;

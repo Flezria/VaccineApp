@@ -92,15 +92,19 @@ namespace VaccineApp.ViewModel
 
             if(await CheckLoginCredentials() == true)
             {
-                FrontPageMaster fpm = new FrontPageMaster();
-                fpm.Master = new FrontPageMasterMenu();
-                fpm.Detail = new NavigationPage(new FrontPageDetail())
-                {
-                    BarBackgroundColor = Color.FromHex("#016A6F"),
-                };
+                //FrontPageMaster fpm = new FrontPageMaster();
+                //fpm.Master = new FrontPageMasterMenu();
+                //fpm.Detail = new NavigationPage(new FrontPageDetail())
+                //{
+                //    BarBackgroundColor = Color.FromHex("#016A6F"),
+                //};
 
-                Application.Current.MainPage = fpm;
-                
+                //Application.Current.MainPage = fpm;
+
+                ResponseMessage = (String)Application.Current.Properties["api_key"];
+                ResponseColor = "#F56161";
+
+
             }
         }
 
@@ -116,7 +120,7 @@ namespace VaccineApp.ViewModel
                 String WSLogin = await services.Login(Email.Trim(), Password);
 
                 //Dette kan eventuelt blive lavet til en switch i stedet.
-                if ((WSLogin != null) && (WSLogin != "\"false\""))
+                if ((WSLogin != null) && (WSLogin != "false"))
                 {
                     if(!Application.Current.Properties.ContainsKey("api_key")) {
                         Application.Current.Properties["api_key"] = WSLogin;
@@ -125,8 +129,8 @@ namespace VaccineApp.ViewModel
                     return true;
                 }
 
-                if (WSLogin == "\"false\"")
-                {   
+                if (WSLogin == "false")
+                {
                     ResponseColor = "#F56161";
                     ResponseMessage = "Email eller kodeord er forkert";
                     return false;
