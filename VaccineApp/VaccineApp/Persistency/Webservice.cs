@@ -125,8 +125,8 @@ namespace VaccineApp.Persistency
 
             try
             {
-                String JsonUser = JsonConvert.SerializeObject(child);
-                var content = new StringContent(JsonUser, Encoding.UTF8, "application/json");
+                String JsonChild = JsonConvert.SerializeObject(child);
+                var content = new StringContent(JsonChild, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync("api/user_childs", content);
 
                 if (response.IsSuccessStatusCode)
@@ -145,6 +145,7 @@ namespace VaccineApp.Persistency
 
             return false;
         }
+
     }
 }
 
