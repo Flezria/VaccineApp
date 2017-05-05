@@ -101,8 +101,8 @@ namespace VaccineApp.ViewModel
 
                 Application.Current.MainPage = fpm;
 
-                //ResponseMessage = (String)Application.Current.Properties["api_key"];
-                //ResponseColor = "#F56161";
+                ResponseMessage = (String)Application.Current.Properties["api_key"];
+                ResponseColor = "#F56161";
 
 
             }

@@ -15,6 +15,7 @@ namespace VaccineApp.View
         public AddChildPage()
         {
             InitializeComponent();
+            BindingContext = new ViewModel.AddChildViewModel(Navigation);
         }
     }
 }

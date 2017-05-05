@@ -16,7 +16,7 @@ namespace VaccineApp.Model
 
         public DateTime birthday { get; set; }
 
-        public int api_key { get; set; }
+        public string api_key { get; set; }
 
         public int user_id { get; set; }
 
@@ -24,14 +24,14 @@ namespace VaccineApp.Model
 
         #endregion
 
-        public UserChilds(int childId, string name, DateTime birthday, int apiKey, int userId, int programId)
+        public UserChilds(int child_id, string name, DateTime birthday, string api_key, int user_id, int program_id)
         {
-            this.child_id = childId;
+            this.child_id = child_id;
             this.name = name;
             this.birthday = birthday;
-            this.api_key = apiKey;
-            this.user_id = userId;
-            this.program_id = programId;
+            this.api_key = api_key;
+            this.user_id = user_id;
+            this.program_id = program_id;
         }
 
     }

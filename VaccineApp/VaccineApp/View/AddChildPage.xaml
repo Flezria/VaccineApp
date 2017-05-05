@@ -3,9 +3,73 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VaccineApp.View.AddChildPage">
 
-    <Label
-        Text="Dette er ADD child page"
-        FontSize="Large"
-        />
-    
+    <Grid BackgroundColor="#E5E5E5">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Text="Opret dit barn"
+               FontSize="48"
+               TextColor="#016A6F"
+               Margin="0, 15, 0, 0"
+               Grid.Row="1"
+               HorizontalOptions="Center">
+
+
+            <Label.FontFamily>
+                <OnPlatform x:TypeArguments="x:String">
+                    <OnPlatform.iOS></OnPlatform.iOS>
+                    <OnPlatform.Android>monofonto.ttf#monofonto</OnPlatform.Android>
+                    <OnPlatform.WinPhone></OnPlatform.WinPhone>
+                </OnPlatform>
+            </Label.FontFamily>
+        </Label>
+                      
+        <StackLayout Padding="50" Grid.Row="3">
+            <Frame OutlineColor="White" Opacity="0.8" Padding="-1">
+                <Entry
+                Text="{Binding Name, Mode=TwoWay}"
+                Placeholder="Navn"
+                PlaceholderColor="Gray"
+                TextColor="Black"
+                />
+            </Frame>
+            <Label
+                Margin="0,6,0,0"
+                Text="Fødelsedag"
+                HorizontalTextAlignment="Center"
+                FontSize="18"
+                TextColor="#016A6F"
+                />
+            <Frame OutlineColor="White" Opacity="0.8" Padding="-1">
+            <DatePicker 
+                VerticalOptions="Center" 
+                Date="{Binding Birthday, Mode=TwoWay}"
+                TextColor="Black"                
+                />
+            </Frame>
+            <Button
+                Text="Opret!"
+                Command="{Binding AddChildCommand}"
+                TextColor="White"
+                BackgroundColor="#016A6F"
+                Margin="0, 10, 0, 0"
+                />
+            <Label
+                Text="{Binding ErrorMessage}"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
+                FontSize="18"
+                TextColor="{Binding ErrorColor}"
+                />
+        </StackLayout>
+
+
+    </Grid>
+
+
 </ContentPage>
