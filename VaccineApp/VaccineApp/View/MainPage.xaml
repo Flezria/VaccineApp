@@ -39,7 +39,7 @@
             </Label.FontFamily>
         </Label>
 
-        <StackLayout Padding="20" Grid.ColumnSpan="2" Grid.Row="3">
+        <!--<StackLayout Padding="20" Grid.ColumnSpan="2" Grid.Row="3">
             <Frame
                     Opacity="0.8"
                     BackgroundColor="White"
@@ -50,15 +50,18 @@
                     BackgroundColor="White"
                     Margin="0, 6, 0, 0"
                     />
-        </StackLayout>
+        </StackLayout>-->
 
         <StackLayout Padding="20" Grid.ColumnSpan="2" Grid.Row="3">
+            <Frame OutlineColor="White" Opacity="0.8" Padding="-1">
             <Entry
                 Text="{Binding Email, Mode=TwoWay}"
                 Placeholder="E-mail"
                 PlaceholderColor="Gray"
                 TextColor="Black"
                 />
+            </Frame>
+            <Frame OutlineColor="White" Opacity="0.8" Padding="-1" Margin="0,6,0,0">
             <Entry
                 Text="{Binding Password, Mode=TwoWay}"
                 Placeholder="Password"
@@ -66,6 +69,7 @@
                 IsPassword="True"
                 TextColor="Black"
                 />
+            </Frame>
             <Button
                 Command="{Binding LoginCommand}"
                 Text="Login!"

@@ -8,6 +8,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -27,20 +28,30 @@
                 </OnPlatform>
             </Label.FontFamily>
         </Label>
-
-        <StackLayout Padding="20" Grid.Row="2">
-            <Entry
+                      
+        <StackLayout Padding="50" Grid.Row="3">
+            <Frame OutlineColor="White" Opacity="0.8" Padding="-1">
+                <Entry
                 Text="{Binding Name, Mode=TwoWay}"
-                Placeholder="Navn test"
+                Placeholder="Navn"
                 PlaceholderColor="Gray"
                 TextColor="Black"
                 />
+            </Frame>
+            <Label
+                Margin="0,6,0,0"
+                Text="Fødelsedag"
+                HorizontalTextAlignment="Center"
+                FontSize="18"
+                TextColor="#016A6F"
+                />
+            <Frame OutlineColor="White" Opacity="0.8" Padding="-1">
             <DatePicker 
                 VerticalOptions="Center" 
                 Date="{Binding Birthday, Mode=TwoWay}"
-                TextColor="Black"
-                
+                TextColor="Black"                
                 />
+            </Frame>
             <Button
                 Text="Opret!"
                 Command="{Binding AddChildCommand}"
@@ -50,6 +61,8 @@
                 />
             <Label
                 Text="{Binding ErrorMessage}"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
                 FontSize="18"
                 TextColor="{Binding ErrorColor}"
                 />

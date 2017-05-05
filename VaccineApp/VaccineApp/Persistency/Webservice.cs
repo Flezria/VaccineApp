@@ -118,16 +118,16 @@ namespace VaccineApp.Persistency
 
         #endregion
 
-        public async Task<bool> AddChild(UserChilds child)
+        public async Task<bool> AddChild(UserChilds child, string api_key)
         {
             client.BaseAddress = new Uri(ServerUrl);
-            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Clear();           
 
             try
             {
                 String JsonChild = JsonConvert.SerializeObject(child);
                 var content = new StringContent(JsonChild, Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("api/user_childs", content);
+                var response = await client.PostAsync($"postchild/{api_key}", content);
 
                 if (response.IsSuccessStatusCode)
                 {

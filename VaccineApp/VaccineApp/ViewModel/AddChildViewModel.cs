@@ -33,7 +33,7 @@ namespace VaccineApp.ViewModel
             get { return _birthday; }
             set
             {
-                _birthday = value;
+                _birthday = value.Date;
                 OnPropertyChanged(nameof(Birthday));
             }
         }
@@ -80,12 +80,14 @@ namespace VaccineApp.ViewModel
 
             var apiKey = (string)Application.Current.Properties["api_key"];
 
+            // temp placeholder for testing.
             UserChilds tempChild = new UserChilds(0, Name, Birthday, apiKey, 17, 1);
 
             try
             {
-                if (await services.AddChild(tempChild) == true)
+                if (await services.AddChild(tempChild, apiKey) == true)
                 {
+                    ErrorColor = "#4EC44E";
                     ErrorMessage = "Succces!";
                 }
             }

@@ -28,57 +28,31 @@
         </Label>
 
         <StackLayout Padding="20" Grid.Row="2">
-            <Frame
-                Opacity="0.8"
-                BackgroundColor="White"
-                />
-            <Frame
-                Opacity="0.8"
-                BackgroundColor="White"
-                Margin="0, 6, 0, 0"
-                />
-            <Frame
-                Opacity="0.8"
-                BackgroundColor="White"
-                Margin="0, 6, 0, 0"
-                />
-            <Frame
-                Opacity="0.8"
-                BackgroundColor="White"
-                Margin="0, 6, 0, 0"
-                />
-            <Frame
-                Opacity="0.8"
-                BackgroundColor="White"
-                Margin="0, 6, 0, 0"
-                />
-            <Frame
-                Opacity="0.8"
-                BackgroundColor="White"
-                Margin="0, 6, 0, 0"
-                />
-
-        </StackLayout>
-
-        <StackLayout Padding="20" Grid.Row="2">
+            <Frame OutlineColor="White" Opacity="0.8" Padding="-1">
             <Entry
                 Text="{Binding Email, Mode=TwoWay}"
                 Placeholder="E-mail"
                 PlaceholderColor="Gray"
                 TextColor="Black"
                 />
+            </Frame>
+            <Frame OutlineColor="White" Opacity="0.8" Padding="-1">
             <Entry
                 Text="{Binding FirstName, Mode=TwoWay}"
                 Placeholder="Fornavn"
                 PlaceholderColor="Gray"
                 TextColor="Black"
                 />
+            </Frame>
+            <Frame OutlineColor="White" Opacity="0.8" Padding="-1">
             <Entry
                 Text="{Binding SurName, Mode=TwoWay}"
                 Placeholder="Efternavn"
                 PlaceholderColor="Gray"
                 TextColor="Black"
                 />
+            </Frame>
+            <Frame OutlineColor="White" Opacity="0.8" Padding="-1">
             <Entry
                 Text="{Binding MobileNr, Mode=TwoWay}"
                 Keyboard="Numeric"
@@ -86,6 +60,8 @@
                 PlaceholderColor="Gray"
                 TextColor="Black"
                 />
+            </Frame>
+            <Frame OutlineColor="White" Opacity="0.8" Padding="-1">
             <Entry
                 Text="{Binding Password, Mode=TwoWay}"
                 Placeholder="Kodeord"
@@ -93,6 +69,8 @@
                 PlaceholderColor="Gray"
                 TextColor="Black"
                 />
+            </Frame>
+            <Frame OutlineColor="White" Opacity="0.8" Padding="-1">
             <Entry
                 Text="{Binding PasswordConfirm, Mode=TwoWay}"
                 Placeholder="Kodeord igen"
@@ -100,6 +78,7 @@
                 PlaceholderColor="Gray"
                 TextColor="Black"
                 />
+            </Frame>
             <Label
                 Text="{Binding ErrorMessage}"
                 FontSize="18"
