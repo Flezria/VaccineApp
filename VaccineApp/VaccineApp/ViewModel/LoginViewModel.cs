@@ -92,17 +92,17 @@ namespace VaccineApp.ViewModel
 
             if(await CheckLoginCredentials() == true)
             {
-                //FrontPageMaster fpm = new FrontPageMaster();
-                //fpm.Master = new FrontPageMasterMenu();
-                //fpm.Detail = new NavigationPage(new FrontPageDetail())
-                //{
-                //    BarBackgroundColor = Color.FromHex("#016A6F"),
-                //};
+                FrontPageMaster fpm = new FrontPageMaster();
+                fpm.Master = new FrontPageMasterMenu();
+                fpm.Detail = new NavigationPage(new FrontPageDetail())
+                {
+                    BarBackgroundColor = Color.FromHex("#016A6F"),
+                };
 
-                //Application.Current.MainPage = fpm;
+                Application.Current.MainPage = fpm;
 
-                ResponseMessage = (String)Application.Current.Properties["api_key"];
-                ResponseColor = "#F56161";
+                //ResponseMessage = (String)Application.Current.Properties["api_key"];
+                //ResponseColor = "#F56161";
 
 
             }
