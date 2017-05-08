@@ -9,6 +9,8 @@ using VaccineApp.View;
 using Xamarin.Forms;
 using VaccineApp.Model;
 using VaccineApp.Services;
+using System.Collections.ObjectModel;
+using VaccineApp.Persistency;
 
 namespace VaccineApp.ViewModel
 {
@@ -19,6 +21,9 @@ namespace VaccineApp.ViewModel
 
         public List<MasterMenuItem> HamburgerMenu { get; set; }
         public NavigationService NavService { get; set; }
+        public MasterMenuItem Filler { get; set; }
+        public Webservice Services { get; set; }
+
 
         private MasterMenuItem _selectedMenuItem;
         public MasterMenuItem SelectedMenuItem
@@ -31,10 +36,28 @@ namespace VaccineApp.ViewModel
                     DoNavigation();
             }
         }
-        public MasterMenuItem Filler { get; set; }
+
+        private ObservableCollection<UserChilds> _childList;
+        public ObservableCollection<UserChilds> ChildList
+        {
+            get { return _childList; }
+            set { _childList = value;
+                OnPropertyChanged(nameof(ChildList));
+            }
+        }
+
+        private int _selectedIndexChild;
+        public int SelectedIndexChild
+        {
+            get { return _selectedIndexChild; }
+            set { _selectedIndexChild = value;
+                OnPropertyChanged(nameof(SelectedIndexChild));
+            }
+        }
+
 
         #endregion
-    
+
         public FrontPageMenuViewModel()
         {
             SelectedMenuItem = new MasterMenuItem();
@@ -44,11 +67,30 @@ namespace VaccineApp.ViewModel
 
             NavService = new NavigationService();
 
+            Services = new Webservice();
+
             HamburgerMenu = new List<MasterMenuItem>();
             AddMenuItems();
 
+            LoadList();
         }
 
+
+        //Hvor skal man starte i appen
+        public async void LoadList()
+        {
+            ChildList = await Services.GetChild((String)Application.Current.Properties["api_key"]);
+
+            if((ChildList == null) || (ChildList.Count == 0))
+            {
+            }
+            else
+            {
+                SelectedIndexChild = 0;
+            }
+        }
+
+        #region Navigation
         private async void DoNavigation()
         {
             switch(SelectedMenuItem.TargetPage)
@@ -77,6 +119,8 @@ namespace VaccineApp.ViewModel
             HamburgerMenu.Add(new MasterMenuItem() { Title = "DerpTown", Icon = "icon.png", TargetPage = "Fill" });
             HamburgerMenu.Add(new MasterMenuItem() { Title = "Unknown", Icon = "icon.png", TargetPage = "Fill" });
         }
+
+        #endregion
 
         #region INotifyPropertyChanged
 

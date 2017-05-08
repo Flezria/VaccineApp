@@ -39,19 +39,6 @@
             </Label.FontFamily>
         </Label>
 
-        <!--<StackLayout Padding="20" Grid.ColumnSpan="2" Grid.Row="3">
-            <Frame
-                    Opacity="0.8"
-                    BackgroundColor="White"
-                    CornerRadius="0"
-                    />
-            <Frame
-                    Opacity="0.8"
-                    BackgroundColor="White"
-                    Margin="0, 6, 0, 0"
-                    />
-        </StackLayout>-->
-
         <StackLayout Padding="20" Grid.ColumnSpan="2" Grid.Row="3">
             <Frame OutlineColor="White" Opacity="0.8" Padding="-1">
             <Entry

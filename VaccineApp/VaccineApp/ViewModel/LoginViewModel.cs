@@ -21,7 +21,7 @@ namespace VaccineApp.ViewModel
         public ICommand NavToRegister { get; set; }
         public ICommand LoginCommand { get; set; }
 
-        public Webservice services { get; set; }
+        public Webservice Services { get; set; }
 
 
         private String _email;
@@ -70,7 +70,7 @@ namespace VaccineApp.ViewModel
             this.navigation = navigation;
             this.NavToRegister = new Command(async() => await NavigateToRegister());
 
-            this.services = new Webservice();
+            this.Services = new Webservice();
             this.LoginCommand = new Command(async() => await LoginUser());
 
             //Check hvis vi kommer fra RegisterPage og har lavet en ny bruger
@@ -101,9 +101,7 @@ namespace VaccineApp.ViewModel
 
                 Application.Current.MainPage = fpm;
 
-                ResponseMessage = (String)Application.Current.Properties["api_key"];
-                ResponseColor = "#F56161";
-
+                StartingPoint(fpm);
 
             }
         }
@@ -117,7 +115,7 @@ namespace VaccineApp.ViewModel
                     return false;
                 }
 
-                String WSLogin = await services.Login(Email.Trim(), Password);
+                String WSLogin = await Services.Login(Email.Trim(), Password);
 
                 //Dette kan eventuelt blive lavet til en switch i stedet.
                 if ((WSLogin != null) && (WSLogin != "false"))
@@ -138,6 +136,14 @@ namespace VaccineApp.ViewModel
 
             ResponseMessage = "Server error!";
             return false;
+        }
+
+        private async void StartingPoint(MasterDetailPage fpm)
+        {
+            if (await Services.CheckForChild((String)Application.Current.Properties["api_key"]) == false)
+            {
+                await fpm.Detail.Navigation.PushAsync(new AddChildPage());
+            }
         }
 
         #region INotifyPropertyChanged
