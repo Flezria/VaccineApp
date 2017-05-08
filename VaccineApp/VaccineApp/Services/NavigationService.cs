@@ -10,6 +10,8 @@ namespace VaccineApp.Services
 {
     class NavigationService
     {
+
+        private MasterDetailPage mdPage { get; set; }
         //Enum for de pages man kan navigere til - skal være identisk med navn på .xaml filen.
         public enum AvailablePages
         {
@@ -17,11 +19,15 @@ namespace VaccineApp.Services
             MainPage,
         }
 
+        public NavigationService()
+        {
+        }
+
         public async Task GotoPageAsync(AvailablePages page)
         {
-            MasterDetailPage mdPage = (MasterDetailPage)Application.Current.MainPage;
+            mdPage = (MasterDetailPage)Application.Current.MainPage;
 
-            switch(page)
+            switch (page)
             {
                 case AvailablePages.AddChildPage:
                     mdPage.IsPresented = false;
@@ -36,6 +42,14 @@ namespace VaccineApp.Services
                     await App.Current.MainPage.DisplayAlert("Error", "Noget gik galt", "ok");
                         break;
             }
+        }
+
+        public async Task PopToRoot()
+        {
+            mdPage = (MasterDetailPage)Application.Current.MainPage;
+
+            mdPage.IsPresented = false;
+            await mdPage.Detail.Navigation.PopToRootAsync();
         }
 
     }
