@@ -16,7 +16,7 @@ namespace VaccineApp.View
         {
             InitializeComponent();
 
-            BindingContext = new ViewModel.FrontPageMenuViewModel();
+            BindingContext = new ViewModel.FrontPageViewModel();
 
         }
     }

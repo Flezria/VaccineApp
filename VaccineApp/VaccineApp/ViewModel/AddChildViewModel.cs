@@ -8,6 +8,7 @@ using VaccineApp.Persistency;
 using VaccineApp.Model;
 using Xamarin.Forms;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace VaccineApp.ViewModel
 {
@@ -104,8 +105,7 @@ namespace VaccineApp.ViewModel
             }
             catch (Exception e)
             {
-                ErrorColor = "#F56161";
-                ErrorMessage = "Error : " + e;
+                Debug.WriteLine(e);
             }
 
         }
