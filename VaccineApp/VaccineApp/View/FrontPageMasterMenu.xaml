@@ -32,7 +32,8 @@
                             VerticalOptions="CenterAndExpand"
                             TextColor="Black"
                             ItemsSource="{Binding ChildList, Mode=TwoWay}"
-                            SelectedIndex="{Binding SelectedIndexChild, Mode=TwoWay}" >
+                            SelectedIndex="{Binding SelectedIndexChild, Mode=TwoWay}" 
+                            >
                     </Picker>
                     </Frame>
                     

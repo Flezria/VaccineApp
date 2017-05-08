@@ -43,6 +43,12 @@ namespace VaccineApp.ViewModel
             get { return _childList; }
             set { _childList = value;
                 OnPropertyChanged(nameof(ChildList));
+
+             if(ChildList != null)
+                {
+                    SelectedIndexChild = 0;
+                }
+
             }
         }
 
@@ -75,7 +81,6 @@ namespace VaccineApp.ViewModel
             LoadList();
 
             MessagingCenter.Subscribe<AddChildViewModel>(this, "update", (sender) => {
-                SelectedIndexChild = 0;
                 LoadList();
             });
         }
