@@ -9,7 +9,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Label
-            Text="FORSIDEN ER HER"
+            Text="FRONTPAGE"
             FontSize="Large"
             HorizontalOptions="Center"
             />

@@ -27,14 +27,16 @@
                                    />
                     <Frame BackgroundColor="White" Opacity="0.8" Padding="-1" Grid.Column="1">
                     <Picker Title="Dine børn"
-                                Grid.Column="1"
-                                HorizontalOptions="Fill"
-                                VerticalOptions="CenterAndExpand"
-                                TextColor="Black"
-                                ItemsSource="{Binding ChildList, Mode=TwoWay}"
-                                SelectedIndex="{Binding SelectedIndexChild, Mode=TwoWay}" />
-                </Frame>
-                    </Grid>
+                            Grid.Column="1"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="CenterAndExpand"
+                            TextColor="Black"
+                            ItemsSource="{Binding ChildList, Mode=TwoWay}"
+                            SelectedIndex="{Binding SelectedIndexChild, Mode=TwoWay}" >
+                    </Picker>
+                    </Frame>
+                    
+                        </Grid>
                     </StackLayout>
 
                     <ListView

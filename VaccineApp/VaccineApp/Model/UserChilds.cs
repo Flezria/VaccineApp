@@ -37,5 +37,10 @@ namespace VaccineApp.Model
             this.gender = gender;
         }
 
+        public override string ToString()
+        {
+            return name;
+        }
+
     }
 }
