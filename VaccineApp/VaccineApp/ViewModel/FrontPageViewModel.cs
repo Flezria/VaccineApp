@@ -73,11 +73,17 @@ namespace VaccineApp.ViewModel
             AddMenuItems();
 
             LoadList();
-        }
 
+            MessagingCenter.Subscribe<AddChildViewModel>(this, "update", (sender) => {
+                SelectedIndexChild = 0;
+                LoadList();
+            });
+        }
+        
 
         public async void LoadList()
         {
+
             ChildList = await Services.GetChild((String)Application.Current.Properties["api_key"]);
 
             if((ChildList != null) || (ChildList.Count != 0))

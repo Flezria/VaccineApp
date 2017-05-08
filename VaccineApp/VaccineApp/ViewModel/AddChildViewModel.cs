@@ -9,6 +9,7 @@ using VaccineApp.Model;
 using Xamarin.Forms;
 using System.ComponentModel;
 using System.Diagnostics;
+using VaccineApp.Services;
 
 namespace VaccineApp.ViewModel
 {
@@ -16,6 +17,10 @@ namespace VaccineApp.ViewModel
     {
 
         #region Properties
+
+        public ICommand AddChildCommand { get; set; }
+        private Webservice Services { get; set; }
+        private NavigationService NavService { get; set; }
 
         private String _name;
         public String Name
@@ -71,36 +76,31 @@ namespace VaccineApp.ViewModel
                 OnPropertyChanged(nameof(ErrorColor));
             }
         }
-        public ICommand AddChildCommand { get; set; }
-        public Webservice services { get; set; }
-
-        private INavigation navigation;
-
         #endregion
 
         // Ctor
-        public AddChildViewModel(INavigation navigation)
+        public AddChildViewModel()
         {
-            services = new Webservice();
+            Services = new Webservice();
+            NavService = new NavigationService();
             ErrorColor = "#E5E5E5";
             this.AddChildCommand = new Command(AddChild);
-            this.navigation = navigation;
         }
 
         private async void AddChild()
         {
 
-            var api_key = (string)Application.Current.Properties["api_key"];
+            var api_key = (String)Application.Current.Properties["api_key"];
 
             // temp placeholder for testing.
             UserChilds tempChild = new UserChilds(0, Name, Birthday, api_key, 17, 1, Gender);
 
             try
             {
-                if (await services.AddChild(tempChild, api_key) == true)
+                if (await Services.AddChild(tempChild, api_key) == true)
                 {
-                    ErrorColor = "#4EC44E";
-                    ErrorMessage = "Succces!";
+                    MessagingCenter.Send<AddChildViewModel>(this, "update");
+                    await NavService.PopToRoot();
                 }
             }
             catch (Exception e)

@@ -82,6 +82,7 @@ namespace VaccineApp.ViewModel
             }
         }
 
+        
         private async Task NavigateToRegister()
         {
             await navigation.PushAsync(new RegisterPage());
