@@ -14,7 +14,7 @@ using VaccineApp.Persistency;
 
 namespace VaccineApp.ViewModel
 {
-    class FrontPageMenuViewModel : INotifyPropertyChanged
+    class FrontPageViewModel : INotifyPropertyChanged
     {
 
         #region Properties
@@ -58,7 +58,7 @@ namespace VaccineApp.ViewModel
 
         #endregion
 
-        public FrontPageMenuViewModel()
+        public FrontPageViewModel()
         {
             SelectedMenuItem = new MasterMenuItem();
 
@@ -81,10 +81,7 @@ namespace VaccineApp.ViewModel
         {
             ChildList = await Services.GetChild((String)Application.Current.Properties["api_key"]);
 
-            if((ChildList == null) || (ChildList.Count == 0))
-            {
-            }
-            else
+            if((ChildList != null) || (ChildList.Count != 0))
             {
                 SelectedIndexChild = 0;
             }

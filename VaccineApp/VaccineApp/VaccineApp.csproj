@@ -47,7 +47,7 @@
     <Compile Include="Persistency\Webservice.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="ViewModel\AddChildViewModel.cs" />
-    <Compile Include="ViewModel\FrontPageMenuViewModel.cs" />
+    <Compile Include="ViewModel\FrontPageViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="View\AddChildPage.xaml.cs">
