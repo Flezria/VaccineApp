@@ -9,6 +9,7 @@ using VaccineApp.Model;
 using System.Net.Http.Formatting;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using System.Collections.ObjectModel;
 
 namespace VaccineApp.Persistency
 {
@@ -32,7 +33,7 @@ namespace VaccineApp.Persistency
                 {
                     var EmailChecked = await result.Content.ReadAsStringAsync();
                     var EmailCheckDeserialize = JsonConvert.DeserializeObject(EmailChecked);
-                    var EmailCheckedBool = (bool)EmailCheckDeserialize;
+                    bool EmailCheckedBool = (bool)EmailCheckDeserialize;
 
                     switch (EmailCheckedBool)
                     {
@@ -118,6 +119,8 @@ namespace VaccineApp.Persistency
 
         #endregion
 
+
+        #region Child services
         public async Task<bool> AddChild(UserChilds child, string api_key)
         {
             client.BaseAddress = new Uri(ServerUrl);
@@ -146,6 +149,63 @@ namespace VaccineApp.Persistency
             return false;
         }
 
+        public async Task<ObservableCollection<UserChilds>> GetChild(String api_key)
+        {
+            client.BaseAddress = new Uri(ServerUrl);
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            try
+            {
+                var result = client.GetAsync($"GetChilds/{api_key}").Result;
+
+                if(result.Content != null)
+                {
+                    var ChildListAsString = await result.Content.ReadAsStringAsync();
+                    var ChildListDeserialize = JsonConvert.DeserializeObject<ObservableCollection<UserChilds>>(ChildListAsString);
+                    ObservableCollection<UserChilds> ChildList = ChildListDeserialize;
+
+                    return ChildList;
+                }
+                
+
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+
+            return null;
+        }
+
+        public async Task<bool> CheckForChild(String api_key)
+        {
+            client.BaseAddress = new Uri(ServerUrl);
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            try
+            {
+                var result = client.GetAsync($"ChildBool/{api_key}").Result;
+
+                if (result.Content != null)
+                {
+                    var ChildExist = await result.Content.ReadAsStringAsync();
+                    var ChildExistDeserialize = JsonConvert.DeserializeObject(ChildExist);
+
+                    return (bool)ChildExistDeserialize;
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+
+            return false;
+        }
+        #endregion
     }
 }
 
