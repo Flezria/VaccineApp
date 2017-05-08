@@ -38,6 +38,17 @@ namespace VaccineApp.ViewModel
             }
         }
 
+        private String _gender;
+        public String Gender
+        {
+            get { return _gender; }
+            set
+            {
+                _gender = value;
+                OnPropertyChanged(nameof(Gender));
+            }
+        }
+
         private String _errorMessage;
         public String ErrorMessage
         {
@@ -78,14 +89,14 @@ namespace VaccineApp.ViewModel
         private async void AddChild()
         {
 
-            var apiKey = (string)Application.Current.Properties["api_key"];
+            var api_key = (string)Application.Current.Properties["api_key"];
 
             // temp placeholder for testing.
-            UserChilds tempChild = new UserChilds(0, Name, Birthday, apiKey, 17, 1);
+            UserChilds tempChild = new UserChilds(0, Name, Birthday, api_key, 17, 1, Gender);
 
             try
             {
-                if (await services.AddChild(tempChild, apiKey) == true)
+                if (await services.AddChild(tempChild, api_key) == true)
                 {
                     ErrorColor = "#4EC44E";
                     ErrorMessage = "Succces!";

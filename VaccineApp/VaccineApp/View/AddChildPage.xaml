@@ -38,6 +38,14 @@
                 TextColor="Black"
                 />
             </Frame>
+            <Frame OutlineColor="White" Opacity="0.8" Padding="-1">
+                <Picker Title="Vælg køn" TextColor="Black" SelectedItem="{Binding Gender,Mode=TwoWay}">
+                    <Picker.Items>
+                        <x:String>Dreng</x:String>
+                        <x:String>Pige</x:String>
+                    </Picker.Items>
+                </Picker>
+            </Frame>
             <Label
                 Margin="0,6,0,0"
                 Text="Fødelsedag"
@@ -45,13 +53,13 @@
                 FontSize="18"
                 TextColor="#016A6F"
                 />
-            <Frame OutlineColor="White" Opacity="0.8" Padding="-1">
+            <Frame OutlineColor="White" Opacity="0.8" Padding="-1">               
             <DatePicker 
                 VerticalOptions="Center" 
                 Date="{Binding Birthday, Mode=TwoWay}"
                 TextColor="Black"                
                 />
-            </Frame>
+            </Frame>            
             <Button
                 Text="Opret!"
                 Command="{Binding AddChildCommand}"
@@ -67,6 +75,8 @@
                 TextColor="{Binding ErrorColor}"
                 />
         </StackLayout>
+        
+        
 
 
     </Grid>

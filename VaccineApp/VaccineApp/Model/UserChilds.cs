@@ -22,9 +22,11 @@ namespace VaccineApp.Model
 
         public int program_id { get; set; }
 
+        public String gender { get; set; }
+
         #endregion
 
-        public UserChilds(int child_id, string name, DateTime birthday, string api_key, int user_id, int program_id)
+        public UserChilds(int child_id, string name, DateTime birthday, string api_key, int user_id, int program_id, string gender)
         {
             this.child_id = child_id;
             this.name = name;
@@ -32,6 +34,7 @@ namespace VaccineApp.Model
             this.api_key = api_key;
             this.user_id = user_id;
             this.program_id = program_id;
+            this.gender = gender;
         }
 
     }
