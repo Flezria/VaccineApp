@@ -76,7 +76,6 @@ namespace VaccineApp.ViewModel
         }
 
 
-        //Hvor skal man starte i appen
         public async void LoadList()
         {
             ChildList = await Services.GetChild((String)Application.Current.Properties["api_key"]);
