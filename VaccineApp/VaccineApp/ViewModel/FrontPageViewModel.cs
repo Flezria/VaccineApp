@@ -24,8 +24,9 @@ namespace VaccineApp.ViewModel
         public MasterMenuItem Filler { get; set; }
         public Webservice Services { get; set; }
 
-        public bool MessageCheck = false;
-        public int ChildListCount;
+        public bool MessageCheck { get; set; }
+        public int ChildListCount { get; set; }
+
 
 
 
