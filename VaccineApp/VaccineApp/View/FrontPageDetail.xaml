@@ -9,9 +9,9 @@
     <ContentPage.Content>
         <StackLayout Spacing="10" x:Name="layout" Padding="10">
             <Frame Padding="10" BackgroundColor="#016A6F">
-                <Label Text="Vaccine liste for (Navn)" FontSize="Large" TextColor="White" HorizontalOptions="CenterAndExpand"/>
+                <Label Text="{Binding SelectedChildsName}" FontSize="Medium" TextColor="White" HorizontalOptions="CenterAndExpand"/>
             </Frame>
-            <ListView x:Name="listView" ItemsSource="{Binding TestList}" HorizontalOptions="CenterAndExpand">
+            <ListView x:Name="listView" ItemsSource="{Binding VacInfoList}" HorizontalOptions="CenterAndExpand">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

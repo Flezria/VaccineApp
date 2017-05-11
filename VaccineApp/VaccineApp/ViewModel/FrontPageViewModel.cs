@@ -27,6 +27,16 @@ namespace VaccineApp.ViewModel
         public bool MessageCheck { get; set; }
         public int ChildListCount { get; set; }
 
+        private string _selectedChildsName;
+        public string SelectedChildsName
+        {
+            get { return _selectedChildsName; }
+            set { _selectedChildsName = value;
+                OnPropertyChanged(nameof(SelectedChildsName));                
+            }
+        }
+
+
 
         private MasterMenuItem _selectedMenuItem;
         public MasterMenuItem SelectedMenuItem
@@ -68,18 +78,23 @@ namespace VaccineApp.ViewModel
                     SelectedIndexChild = ChildListCount;   
                 };
 
+                if (SelectedIndexChild != -1)
+                {
+                    LoadDisplayVacInfo();
+                    SelectedChildsName = "Vaccine program for " + ChildList[SelectedIndexChild].name;
+                }
+
             }
         }
 
         #endregion
 
-        private ObservableCollection<Vaccinations> _testList;
-
-        public ObservableCollection<Vaccinations> TestList
+        private List<Vaccinations> _vacInfoList;
+        public List<Vaccinations> VacInfoList
         {
-            get { return _testList; }
-            set { _testList = value;
-                OnPropertyChanged(nameof(TestList));
+            get { return _vacInfoList; }
+            set { _vacInfoList = value;
+                OnPropertyChanged(nameof(VacInfoList));
             }
         }
 
@@ -100,9 +115,9 @@ namespace VaccineApp.ViewModel
             HamburgerMenu = new List<MasterMenuItem>();
             AddMenuItems();
 
-            TestListLoad();
-
             LoadList();
+            LoadDisplayVacInfo();
+
 
             MessagingCenter.Subscribe<AddChildViewModel>(this, "update", (sender) => {
                 LoadList();
@@ -118,16 +133,9 @@ namespace VaccineApp.ViewModel
             ChildList = await Services.GetChild((String)Application.Current.Properties["api_key"]);
         }
 
-        public void TestListLoad()
-        {
-            TestList = new ObservableCollection<Vaccinations>();
-            TestList.Add(new Vaccinations(1, "Vaccine-1", 4, 1));
-            TestList.Add(new Vaccinations(2, "Vaccine-2", 8, 1));
-            TestList.Add(new Vaccinations(3, "Vaccine-3", 12, 1));
-            TestList.Add(new Vaccinations(4, "Vaccine-4", 16, 1));
-            TestList.Add(new Vaccinations(4, "Vaccine-5", 20, 1));
-            TestList.Add(new Vaccinations(4, "Vaccine-6", 24, 1));
-
+        public async void LoadDisplayVacInfo()
+        {    
+            VacInfoList = await Services.GetVacProgram((String)Application.Current.Properties["api_key"], ChildList[SelectedIndexChild].program_id);            
         }
 
         #region Navigation
