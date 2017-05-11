@@ -24,9 +24,8 @@ namespace VaccineApp.ViewModel
         public MasterMenuItem Filler { get; set; }
         public Webservice Services { get; set; }
 
-        public bool MessageCheck = false;
-        public int ChildListCount;
-
+        public bool MessageCheck { get; set; }
+        public int ChildListCount { get; set; }
 
 
         private MasterMenuItem _selectedMenuItem;
@@ -72,7 +71,6 @@ namespace VaccineApp.ViewModel
             }
         }
 
-
         #endregion
 
         private ObservableCollection<Vaccinations> _testList;
@@ -88,6 +86,8 @@ namespace VaccineApp.ViewModel
 
         public FrontPageViewModel()
         {
+            MessageCheck = false;
+
             SelectedMenuItem = new MasterMenuItem();
 
             //Der skal findes en bedre løsning end dette Filler object.
@@ -127,7 +127,6 @@ namespace VaccineApp.ViewModel
             TestList.Add(new Vaccinations(4, "Vaccine-4", 16, 1));
             TestList.Add(new Vaccinations(4, "Vaccine-5", 20, 1));
             TestList.Add(new Vaccinations(4, "Vaccine-6", 24, 1));
-
 
         }
 
