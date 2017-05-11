@@ -24,6 +24,10 @@ namespace VaccineApp.ViewModel
         public MasterMenuItem Filler { get; set; }
         public Webservice Services { get; set; }
 
+        public bool MessageCheck = false;
+        public int ChildListCount;
+
+
 
         private MasterMenuItem _selectedMenuItem;
         public MasterMenuItem SelectedMenuItem
@@ -44,20 +48,27 @@ namespace VaccineApp.ViewModel
             set { _childList = value;
                 OnPropertyChanged(nameof(ChildList));
 
-             if(ChildList != null)
+             if(MessageCheck != true & ChildList != null)
                 {
                     SelectedIndexChild = 0;
-                }
-
+                };
+          
             }
         }
-
+        
         private int _selectedIndexChild;
         public int SelectedIndexChild
         {
             get { return _selectedIndexChild; }
             set { _selectedIndexChild = value;
                 OnPropertyChanged(nameof(SelectedIndexChild));
+
+                if (MessageCheck == true)
+                {   
+                    MessageCheck = false;
+                    SelectedIndexChild = ChildListCount;   
+                };
+
             }
         }
 
@@ -82,19 +93,16 @@ namespace VaccineApp.ViewModel
 
             MessagingCenter.Subscribe<AddChildViewModel>(this, "update", (sender) => {
                 LoadList();
+                MessageCheck = true;
+                ChildListCount = ChildList.Count() - 1;
             });
         }
+
         
 
         public async void LoadList()
         {
-
             ChildList = await Services.GetChild((String)Application.Current.Properties["api_key"]);
-
-            if((ChildList != null) || (ChildList.Count != 0))
-            {
-                SelectedIndexChild = 0;
-            }
         }
 
         #region Navigation
