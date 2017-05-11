@@ -206,6 +206,37 @@ namespace VaccineApp.Persistency
             return false;
         }
         #endregion
+
+        #region Vaccine Services
+
+        public async Task<List<Vaccinations>> GetVacProgram(string api_key, int program_id)
+        {
+            client.BaseAddress = new Uri(ServerUrl);
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            try
+            {
+                var result = client.GetAsync($"GetVacProgram/{api_key}/{program_id}").Result;
+
+                if (result.Content != null)
+                {
+                    var VacListAsString = await result.Content.ReadAsStringAsync();
+                    var VacListDeserialize = JsonConvert.DeserializeObject<List<Vaccinations>>(VacListAsString);
+                    List<Vaccinations> VacList = VacListDeserialize;
+
+                    return VacList;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+
+            return null;
+        }
+
+        #endregion
     }
 }
 
