@@ -64,6 +64,17 @@ namespace VaccineApp.ViewModel
 
         #endregion
 
+        private ObservableCollection<Vaccinations> _testList;
+
+        public ObservableCollection<Vaccinations> TestList
+        {
+            get { return _testList; }
+            set { _testList = value;
+                OnPropertyChanged(nameof(TestList));
+            }
+        }
+
+
         public FrontPageViewModel()
         {
             SelectedMenuItem = new MasterMenuItem();
@@ -77,6 +88,8 @@ namespace VaccineApp.ViewModel
 
             HamburgerMenu = new List<MasterMenuItem>();
             AddMenuItems();
+
+            TestListLoad();
 
             LoadList();
 
@@ -95,6 +108,19 @@ namespace VaccineApp.ViewModel
             {
                 SelectedIndexChild = 0;
             }
+        }
+
+        public void TestListLoad()
+        {
+            TestList = new ObservableCollection<Vaccinations>();
+            TestList.Add(new Vaccinations(1, "Vaccine-1", 4, 1));
+            TestList.Add(new Vaccinations(2, "Vaccine-2", 8, 1));
+            TestList.Add(new Vaccinations(3, "Vaccine-3", 12, 1));
+            TestList.Add(new Vaccinations(4, "Vaccine-4", 16, 1));
+            TestList.Add(new Vaccinations(4, "Vaccine-5", 20, 1));
+            TestList.Add(new Vaccinations(4, "Vaccine-6", 24, 1));
+
+
         }
 
         #region Navigation
@@ -121,9 +147,9 @@ namespace VaccineApp.ViewModel
 
         private void AddMenuItems()
         {
-            HamburgerMenu.Add(new MasterMenuItem() { Title = "Tilføj barn", Icon = "icon.png", TargetPage = "AddChildPage" });
+            HamburgerMenu.Add(new MasterMenuItem() { Title = "Opret barn", Icon = "icon.png", TargetPage = "AddChildPage" });
             HamburgerMenu.Add(new MasterMenuItem() { Title = "Indstillinger", Icon = "icon.png", TargetPage = "MainPage" });
-            HamburgerMenu.Add(new MasterMenuItem() { Title = "DerpTown", Icon = "icon.png", TargetPage = "Fill" });
+            HamburgerMenu.Add(new MasterMenuItem() { Title = "Unknown", Icon = "icon.png", TargetPage = "Fill" });
             HamburgerMenu.Add(new MasterMenuItem() { Title = "Unknown", Icon = "icon.png", TargetPage = "Fill" });
         }
 

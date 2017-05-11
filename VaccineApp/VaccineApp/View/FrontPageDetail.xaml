@@ -7,12 +7,34 @@
              BackgroundColor="#E5E5E5">
     
     <ContentPage.Content>
-        <StackLayout>
-            <Label
-            Text="FRONTPAGE"
-            FontSize="Large"
-            HorizontalOptions="Center"
-            />
+        <StackLayout Spacing="10" x:Name="layout" Padding="10">
+            <Frame Padding="10" BackgroundColor="#016A6F">
+                <Label Text="Vaccine liste for (Navn)" FontSize="Large" TextColor="White" HorizontalOptions="CenterAndExpand"/>
+            </Frame>
+            <ListView x:Name="listView" ItemsSource="{Binding TestList}" HorizontalOptions="CenterAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Column="0" Grid.Row="0" Text="Vaccine: " FontSize="14" />
+                                <Label Grid.Column="1" Grid.Row="0" Text="{Binding name}" FontSize="14" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Vaccine Mdr: " FontSize="14" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="{Binding injection_month}" FontSize="14" />
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
