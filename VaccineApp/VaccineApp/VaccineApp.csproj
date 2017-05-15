@@ -50,6 +50,7 @@
     <Compile Include="ViewModel\FrontPageViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
+    <Compile Include="ViewModel\VaccineInfoViewModel.cs" />
     <Compile Include="View\AddChildPage.xaml.cs">
       <DependentUpon>AddChildPage.xaml</DependentUpon>
     </Compile>
