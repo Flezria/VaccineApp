@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
 
+  <color name="LVSelectColor">#B8B8B8</color>
+
   <style name="MainTheme" parent="MainTheme.Base">
   </style>
   <!-- Base theme applied no matter what API -->
@@ -20,6 +22,12 @@
     <!-- You can also set colorControlNormal, colorControlActivated
          colorControlHighlight and colorSwitchThumbNormal. -->
     <item name="windowActionModeOverlay">true</item>
+
+    <item name="android:colorPressedHighlight">@color/LVSelectColor</item>
+    <item name="android:colorLongPressedHighlight">@color/LVSelectColor</item>
+    <item name="android:colorFocusedHighlight">@color/LVSelectColor</item>
+    <item name="android:colorActivatedHighlight">@color/LVSelectColor</item>
+    <item name="android:activatedBackgroundIndicator">@color/LVSelectColor</item>
 
 
     <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>

@@ -52,7 +52,6 @@
                                     <StackLayout
                                         VerticalOptions="FillAndExpand"
                                         Orientation="Horizontal"
-                                        BackgroundColor="#E5E5E5"
                                         Padding="20, 10, 0, 10"
                                         Spacing="20">
                                         <Image
