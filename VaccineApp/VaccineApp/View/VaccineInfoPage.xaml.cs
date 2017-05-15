@@ -16,6 +16,9 @@ namespace VaccineApp.View
         public VaccineInfoPage()
         {
             InitializeComponent();
+
+            BindingContext = new ViewModel.VaccineInfoViewModel();
+
         }
     }
 }
