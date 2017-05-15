@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             x:Class="VaccineApp.View.VaccineInfoPage">
+
+    <StackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand" Padding="20">
+        <StackLayout BackgroundColor="White" Padding="0,10,0,0">
+            <Label Text="Vaccine Information" FontSize="16" HorizontalOptions="Center"/>
+            <ScrollView>
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Placeholder" />
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+
+
+    </StackLayout>
+
+
+    
+</pages:PopupPage>

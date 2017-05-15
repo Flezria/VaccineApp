@@ -151,6 +151,10 @@ namespace VaccineApp.ViewModel
                     await NavService.GotoPageAsync(NavigationService.AvailablePages.MainPage);
                     SelectedMenuItem = Filler;
                     break;
+                case "VaccineInfoPage":
+                    await NavService.GotoPageAsync(NavigationService.AvailablePages.VaccineInfoPage);
+                    SelectedMenuItem = Filler;
+                    break;
             }
 
             //For testing properties api_key
@@ -164,7 +168,7 @@ namespace VaccineApp.ViewModel
         {
             HamburgerMenu.Add(new MasterMenuItem() { Title = "Opret barn", Icon = "icon.png", TargetPage = "AddChildPage" });
             HamburgerMenu.Add(new MasterMenuItem() { Title = "Indstillinger", Icon = "icon.png", TargetPage = "MainPage" });
-            HamburgerMenu.Add(new MasterMenuItem() { Title = "Unknown", Icon = "icon.png", TargetPage = "Fill" });
+            HamburgerMenu.Add(new MasterMenuItem() { Title = "PopupTest", Icon = "icon.png", TargetPage = "VaccineInfoPage" });
             HamburgerMenu.Add(new MasterMenuItem() { Title = "Unknown", Icon = "icon.png", TargetPage = "Fill" });
         }
 
