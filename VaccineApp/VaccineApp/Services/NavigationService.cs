@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using VaccineApp.View;
 using Xamarin.Forms;
+using Rg.Plugins.Popup.Services;
+using Rg.Plugins.Popup.Pages;
 
 namespace VaccineApp.Services
 {
@@ -17,6 +19,7 @@ namespace VaccineApp.Services
         {
             AddChildPage,
             MainPage,
+            VaccineInfoPage,
         }
 
         public NavigationService()
@@ -38,11 +41,18 @@ namespace VaccineApp.Services
                     mdPage.IsPresented = false;
                     await mdPage.Detail.Navigation.PushAsync(new MainPage());
                     break;
+                case AvailablePages.VaccineInfoPage:
+                    mdPage.IsPresented = false;
+                    PopupPage qrv = new VaccineInfoPage();
+                     await PopupNavigation.PushAsync(qrv);
+                    break;
                 default:
                     await App.Current.MainPage.DisplayAlert("Error", "Noget gik galt", "ok");
                         break;
             }
         }
+
+
 
         public async Task PopToRoot()
         {
