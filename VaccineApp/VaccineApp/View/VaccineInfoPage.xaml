@@ -5,8 +5,8 @@
              x:Class="VaccineApp.View.VaccineInfoPage">
 
     <StackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand" Padding="20">
-        <StackLayout BackgroundColor="White" Padding="0,10,0,0">
-            <Label Text="Vaccine Information" FontSize="16" HorizontalOptions="Center"/>
+        <StackLayout BackgroundColor="#016A6F" Padding="0,10,0,0">
+            <Label Text="Vaccine Information"  TextColor="White" FontSize="16" HorizontalOptions="Center" BackgroundColor="#016A6F"/>
             <ScrollView>
                 <StackLayout>
                     <StackLayout Orientation="Horizontal">
