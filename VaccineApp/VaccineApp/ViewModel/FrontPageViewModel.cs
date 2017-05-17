@@ -23,6 +23,7 @@ namespace VaccineApp.ViewModel
         public NavigationService NavService { get; set; }
         public MasterMenuItem Filler { get; set; }
         public Webservice Services { get; set; }
+        public ICommand OnItemTapCommand { get; set; }
 
         public bool MessageCheck { get; set; }
         public int ChildListCount { get; set; }
@@ -35,8 +36,6 @@ namespace VaccineApp.ViewModel
                 OnPropertyChanged(nameof(SelectedChildsName));                
             }
         }
-
-
 
         private MasterMenuItem _selectedMenuItem;
         public MasterMenuItem SelectedMenuItem
@@ -70,16 +69,30 @@ namespace VaccineApp.ViewModel
             }
         }
 
-        #endregion
-
         private List<Vaccinations> _vacInfoList;
         public List<Vaccinations> VacInfoList
         {
             get { return _vacInfoList; }
-            set { _vacInfoList = value;
+            set
+            {
+                _vacInfoList = value;
                 OnPropertyChanged(nameof(VacInfoList));
             }
         }
+
+        public static Vaccinations _vacItemSelected;
+
+        public Vaccinations VacItemSelected
+        {
+            get { return _vacItemSelected; }
+            set { _vacItemSelected = value;
+                OnPropertyChanged(nameof(VacItemSelected));
+                ItemSelectedMethod();
+            }
+        }
+
+
+        #endregion
 
 
         public FrontPageViewModel()
@@ -130,6 +143,13 @@ namespace VaccineApp.ViewModel
             {
                 LoadDisplayVacInfo();
                 SelectedChildsName = "Vaccine program for " + ChildList[SelectedIndexChild].name;
+            }
+        }
+
+        private async void ItemSelectedMethod()
+        {
+            if(VacItemSelected != null) {
+            await NavService.GotoPageAsync(NavigationService.AvailablePages.VaccineInfoPage);
             }
         }
 

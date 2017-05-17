@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using VaccineApp.Model;
 using Xamarin.Forms;
 
 namespace VaccineApp.ViewModel
@@ -16,11 +17,24 @@ namespace VaccineApp.ViewModel
 
         #region Properties
         public ICommand ClosePopupCommand { get; set; }
+
+        private Vaccinations _derp;
+
+        public Vaccinations Derp
+        {
+            get { return _derp; }
+            set { _derp = value;
+                OnPropertyChanged(nameof(Derp));
+            }
+        }
+
         #endregion
 
         public VaccineInfoViewModel()
         {
             ClosePopupCommand = new Command(ClosePopup);
+
+            Derp = FrontPageViewModel._vacItemSelected;
         }
 
         private void ClosePopup()

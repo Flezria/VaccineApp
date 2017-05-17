@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VaccineApp.View.FrontPageDetail"
+             xmlns:b="clr-namespace:Behaviors;assembly=BehaviorsLibrary"
              Title="Forside"
              Padding="10"
              BackgroundColor="#E5E5E5">
@@ -11,7 +12,7 @@
             <Frame Padding="10" BackgroundColor="#016A6F">
                 <Label Text="{Binding SelectedChildsName}" FontSize="Medium" TextColor="White" HorizontalOptions="CenterAndExpand"/>
             </Frame>
-            <ListView x:Name="listView" ItemsSource="{Binding VacInfoList}" HorizontalOptions="CenterAndExpand">
+            <ListView x:Name="listView" ItemsSource="{Binding VacInfoList}" SelectedItem="{Binding VacItemSelected, Mode=TwoWay}" HorizontalOptions="CenterAndExpand">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

@@ -48,7 +48,8 @@
             <ScrollView>
                 <StackLayout>
                   <StackLayout Orientation="Vertical" BackgroundColor="#E5E5E5" Padding="5, 5, 10, 5">
-                    <Label Text="Vaccine Navn: navn her"/>
+                    <Label Text="Vaccine Navn: "/>
+                    <Label Text="{Binding Derp.name}"/>
                     <Label Text="Hvor er stik?: Øvers på armen"/>
                     <Label Text="Hyppigeste bivirkninger: " />
                     <Label Text="Bivirkning 1" />
