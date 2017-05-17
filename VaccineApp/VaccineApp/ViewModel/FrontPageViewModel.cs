@@ -56,12 +56,7 @@ namespace VaccineApp.ViewModel
             get { return _childList; }
             set { _childList = value;
                 OnPropertyChanged(nameof(ChildList));
-
-             if(MessageCheck != true & ChildList != null)
-                {
-                    SelectedIndexChild = 0;
-                };
-          
+                ChildListMethod();
             }
         }
         
@@ -71,19 +66,7 @@ namespace VaccineApp.ViewModel
             get { return _selectedIndexChild; }
             set { _selectedIndexChild = value;
                 OnPropertyChanged(nameof(SelectedIndexChild));
-
-                if (MessageCheck == true)
-                {   
-                    MessageCheck = false;
-                    SelectedIndexChild = ChildListCount;   
-                };
-
-                if (SelectedIndexChild != -1)
-                {
-                    LoadDisplayVacInfo();
-                    SelectedChildsName = "Vaccine program for " + ChildList[SelectedIndexChild].name;
-                }
-
+                SelectedIndexMethod();
             }
         }
 
@@ -115,9 +98,7 @@ namespace VaccineApp.ViewModel
             HamburgerMenu = new List<MasterMenuItem>();
             AddMenuItems();
 
-            LoadList();
-            LoadDisplayVacInfo();
-
+            LoadInCtor();
 
             MessagingCenter.Subscribe<AddChildViewModel>(this, "update", (sender) => {
                 LoadList();
@@ -126,17 +107,55 @@ namespace VaccineApp.ViewModel
             });
         }
 
-        
-
-        public async void LoadList()
+        #region Setter Methods
+        //Method til ChildList setter
+        private void ChildListMethod()
         {
-            ChildList = await Services.GetChild((String)Application.Current.Properties["api_key"]);
+            if ((MessageCheck != true) && (ChildList != null))
+            {
+                SelectedIndexChild = 0;
+            }
         }
 
-        public async void LoadDisplayVacInfo()
+        //Method til SelectedIndex setter
+        private void SelectedIndexMethod()
+        {
+            if (MessageCheck == true)
+            {
+                MessageCheck = false;
+                SelectedIndexChild = ChildListCount;
+            };
+
+            if ((ChildList.Count != 0) && (SelectedIndexChild != -1))
+            {
+                LoadDisplayVacInfo();
+                SelectedChildsName = "Vaccine program for " + ChildList[SelectedIndexChild].name;
+            }
+        }
+
+        #endregion
+
+        #region Load Lists Methods
+        private async void LoadList()
+        {
+                ChildList = await Services.GetChild((String)Application.Current.Properties["api_key"]);   
+        }
+
+        private async void LoadDisplayVacInfo()
         {    
             VacInfoList = await Services.GetVacProgram((String)Application.Current.Properties["api_key"], ChildList[SelectedIndexChild].program_id);            
         }
+
+        private async void LoadInCtor()
+        {
+            if (await Services.CheckForChild((String)Application.Current.Properties["api_key"]) == true)
+            {
+                LoadList();
+                LoadDisplayVacInfo();
+            }
+        }
+
+        #endregion
 
         #region Navigation
         private async void DoNavigation()

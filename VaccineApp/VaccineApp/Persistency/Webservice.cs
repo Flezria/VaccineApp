@@ -75,6 +75,7 @@ namespace VaccineApp.Persistency
             }
             catch (Exception e)
             {
+                await App.Current.MainPage.DisplayAlert("Internet error", "Kan ikke forbinde til internettet", "OK");
                 Debug.WriteLine(e);
             }
 
@@ -143,6 +144,7 @@ namespace VaccineApp.Persistency
             }
             catch (Exception e)
             {
+                await App.Current.MainPage.DisplayAlert("Internet error", "Kan ikke forbinde til internettet", "OK");
                 Debug.WriteLine(e);
             }
 
@@ -172,6 +174,7 @@ namespace VaccineApp.Persistency
             }
             catch (Exception e)
             {
+                await App.Current.MainPage.DisplayAlert("Internet error", "Kan ikke forbinde til internettet", "OK");
                 Debug.WriteLine(e);
             }
 
@@ -200,6 +203,7 @@ namespace VaccineApp.Persistency
             }
             catch (Exception e)
             {
+                await App.Current.MainPage.DisplayAlert("Internet error", "Kan ikke forbinde til internettet", "OK");
                 Debug.WriteLine(e);
             }
 
@@ -230,6 +234,7 @@ namespace VaccineApp.Persistency
             }
             catch (Exception e)
             {
+                await App.Current.MainPage.DisplayAlert("Internet error", "Kan ikke forbinde til internettet", "OK");
                 Debug.WriteLine(e);
             }
 
