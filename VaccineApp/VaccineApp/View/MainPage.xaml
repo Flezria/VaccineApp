@@ -59,7 +59,7 @@
             </Frame>
             <Button
                 Command="{Binding LoginCommand}"
-                Text="Login!"
+                Text="Login"
                 TextColor="White"
                 BackgroundColor="#016A6F"
                 />

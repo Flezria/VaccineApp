@@ -70,7 +70,7 @@ namespace VaccineApp.ViewModel
             }
         }
 
-        #endregion
+       
 
         private List<Vaccinations> _vacInfoList;
         public List<Vaccinations> VacInfoList
@@ -80,6 +80,8 @@ namespace VaccineApp.ViewModel
                 OnPropertyChanged(nameof(VacInfoList));
             }
         }
+
+        #endregion
 
 
         public FrontPageViewModel()
