@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using VaccineApp.Model;
 using Xamarin.Forms;
+using VaccineApp.Persistency;
 
 namespace VaccineApp.ViewModel
 {
@@ -17,24 +18,38 @@ namespace VaccineApp.ViewModel
 
         #region Properties
         public ICommand ClosePopupCommand { get; set; }
+        public Webservice Services { get; set; }
 
-        private Vaccinations _derp;
 
-        public Vaccinations Derp
+        private VaccineInfo _vacInfo;
+        public VaccineInfo VacInfo
         {
-            get { return _derp; }
-            set { _derp = value;
-                OnPropertyChanged(nameof(Derp));
+            get { return _vacInfo; }
+            set { _vacInfo = value;
+                OnPropertyChanged(nameof(VacInfo));
             }
         }
 
+
+
         #endregion
+
 
         public VaccineInfoViewModel()
         {
             ClosePopupCommand = new Command(ClosePopup);
 
-            Derp = FrontPageViewModel._vacItemSelected;
+            Services = new Webservice();
+
+            GetVacInfo();  
+        }
+
+        private async void GetVacInfo()
+        {
+            if (FrontPageViewModel._vacItemSelected != null)
+            {
+                VacInfo = await Services.GetVacInfo((String)Application.Current.Properties["api_key"], FrontPageViewModel._vacItemSelected.vaccine_id);
+            }
         }
 
         private void ClosePopup()

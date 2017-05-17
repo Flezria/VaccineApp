@@ -81,7 +81,6 @@ namespace VaccineApp.ViewModel
         }
 
         public static Vaccinations _vacItemSelected;
-
         public Vaccinations VacItemSelected
         {
             get { return _vacItemSelected; }

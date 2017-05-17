@@ -241,8 +241,36 @@ namespace VaccineApp.Persistency
             return null;
         }
 
-        #endregion
+        public async Task<VaccineInfo> GetVacInfo(string api_key, int Vac_ID)
+        {
+            client.BaseAddress = new Uri(ServerUrl);
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            try
+            {
+                var result = client.GetAsync($"GetVacInfo/{api_key}/{Vac_ID}").Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    var VacInfoAsString = await result.Content.ReadAsStringAsync();
+                    var VacInfoDeserialize = JsonConvert.DeserializeObject<VaccineInfo>(VacInfoAsString);
+                    VaccineInfo VacInfo = VacInfoDeserialize;
+
+                    return VacInfo;
+                }
+
+            }
+            catch (Exception e)
+            {
+                await App.Current.MainPage.DisplayAlert("Internet error", "Kan ikke forbinde til internettet", "OK");
+                Debug.WriteLine(e);
+            }
+
+            return null;
+        }
+            #endregion
+        }
     }
-}
 
 
