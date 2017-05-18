@@ -93,7 +93,7 @@ namespace VaccineApp.ViewModel
             var api_key = (String)Application.Current.Properties["api_key"];
 
             // temp placeholder for testing.
-            UserChilds tempChild = new UserChilds(0, Name, Birthday, api_key, 0, 0, Gender);
+            UserChilds tempChild = new UserChilds(0, Name, Birthday, api_key, Gender, 0);
 
             try
             {

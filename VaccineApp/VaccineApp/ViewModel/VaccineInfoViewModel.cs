@@ -19,8 +19,7 @@ namespace VaccineApp.ViewModel
         #region Properties
         public ICommand ClosePopupCommand { get; set; }
         public Webservice Services { get; set; }
-
-
+        
         private VaccineInfo _vacInfo;
         public VaccineInfo VacInfo
         {
@@ -29,19 +28,16 @@ namespace VaccineApp.ViewModel
                 OnPropertyChanged(nameof(VacInfo));
             }
         }
-
-
-
+        
         #endregion
 
 
         public VaccineInfoViewModel()
         {
-            ClosePopupCommand = new Command(ClosePopup);
-
             Services = new Webservice();
+            GetVacInfo();
 
-            GetVacInfo();  
+            ClosePopupCommand = new Command(ClosePopup);
         }
 
         private async void GetVacInfo()

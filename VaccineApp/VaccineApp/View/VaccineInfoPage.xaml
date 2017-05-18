@@ -47,7 +47,7 @@
           
             <ScrollView>
                 <StackLayout>
-                  <StackLayout Orientation="Vertical" BackgroundColor="#E5E5E5" Padding="5, 5, 10, 5">
+                  <StackLayout Orientation="Vertical" BackgroundColor="#E5E5E5" Padding="5, 5, 10, 5" >
                     <Grid>
 
                         <Grid.ColumnDefinitions>
@@ -55,26 +55,26 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                       
-                      <Label Grid.Column="0" Grid.Row="0" Text="Vaccine navn : " Font="Bold" />
-                      <Label Grid.Column="1" Grid.Row="0" Text="{Binding VacInfo.name}"/>
+                      <Label Grid.Column="0" Grid.Row="0" Text="Vaccine navn : " Font="Bold, 16"  />
+                      <Label Grid.Column="1" Grid.Row="0" Text="{Binding VacInfo.name}" Font="16" />
                       
-                      <Label Grid.Column="0" Grid.Row="1" Text="Stik : " Font="Bold"/>
-                      <Label Grid.Column="1" Grid.Row="1" Text="{Binding VacInfo.injection_spot}" />
+                      <Label Grid.Column="0" Grid.Row="1" Text="Stik : " Font="Bold, 16"/>
+                      <Label Grid.Column="1" Grid.Row="1" Text="{Binding VacInfo.injection_spot}" Font="16" />
                       
-                      <Label Grid.Column="0" Grid.Row="2" Text="Bivirkninger : " Font="Bold"/>
-                      <Label Grid.Column="1" Grid.Row="2" Text="{Binding VacInfo.side_effects}"/>
-                      
-                      <Label Grid.Column="0" Grid.Row="3" Text="Information : " Font="Bold"/>
-                      <Label Grid.Column="1" Grid.Row="3" Text="{Binding VacInfo.general_info}"/>
+                      <Label Grid.Column="0" Grid.Row="2" Text="Bivirkninger : " Font="Bold, 16"/>
+                      <Label Grid.Column="1" Grid.Row="2" Text="{Binding VacInfo.side_effects}" Font="16"/>
+
+                      <Label Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding VacInfo.general_info}" Font="16"/>
+
                     </Grid>
                     
-                                      
+                                                
                   </StackLayout>
                 </StackLayout>
             </ScrollView>
