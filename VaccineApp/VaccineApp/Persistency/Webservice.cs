@@ -120,7 +120,6 @@ namespace VaccineApp.Persistency
 
         #endregion
 
-
         #region Child services
         public async Task<bool> AddChild(UserChilds child, string api_key)
         {
@@ -270,7 +269,8 @@ namespace VaccineApp.Persistency
             return null;
         }
             #endregion
-        }
-    }
+
+     }
+}
 
 

@@ -58,23 +58,22 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                      
+                              
                       <Label Grid.Column="0" Grid.Row="0" Text="Vaccine navn : " Font="Bold, 16"  />
                       <Label Grid.Column="1" Grid.Row="0" Text="{Binding VacInfo.name}" Font="16" />
                       
-                      <Label Grid.Column="0" Grid.Row="1" Text="Stik : " Font="Bold, 16"/>
+                      <Label Grid.Column="0" Grid.Row="1" Text="Stik : " Font="Bold, 16" />
                       <Label Grid.Column="1" Grid.Row="1" Text="{Binding VacInfo.injection_spot}" Font="16" />
                       
-                      <Label Grid.Column="0" Grid.Row="2" Text="Bivirkninger : " Font="Bold, 16"/>
-                      <Label Grid.Column="1" Grid.Row="2" Text="{Binding VacInfo.side_effects}" Font="16"/>
-
-                      <Label Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding VacInfo.general_info}" Font="16"/>
+                      <Label Grid.Column="0" Grid.Row="2" Text="Bivirkninger : " Font="Bold, 16" />
+                      <Label Grid.Column="1" Grid.Row="2" Text="{Binding VacInfo.side_effects}" Font="16" />
 
                     </Grid>
+
+                      <Label  Text="Information :" Font="Bold, 16"/>
+                      <Label  Text="{Binding VacInfo.general_info}" Font="16"/>
                     
-                                                
                   </StackLayout>
                 </StackLayout>
             </ScrollView>
