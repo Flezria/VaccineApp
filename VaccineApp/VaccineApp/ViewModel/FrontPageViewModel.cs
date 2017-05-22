@@ -144,11 +144,12 @@ namespace VaccineApp.ViewModel
                 SelectedChildsName = "Vaccine program for " + ChildList[SelectedIndexChild].name;
             }
         }
-
+        //ItemSelect method
         private async void ItemSelectedMethod()
         {
             if(VacItemSelected != null) {
             await NavService.GotoPageAsync(NavigationService.AvailablePages.VaccineInfoPage);
+            VacItemSelected = null;
             }
         }
 
@@ -204,8 +205,8 @@ namespace VaccineApp.ViewModel
 
         private void AddMenuItems()
         {
-            HamburgerMenu.Add(new MasterMenuItem() { Title = "Opret barn", Icon = "icon.png", TargetPage = "AddChildPage" });
-            HamburgerMenu.Add(new MasterMenuItem() { Title = "Indstillinger", Icon = "icon.png", TargetPage = "MainPage" });
+            HamburgerMenu.Add(new MasterMenuItem() { Title = "Opret barn", Icon = "addChild.png", TargetPage = "AddChildPage" });
+            HamburgerMenu.Add(new MasterMenuItem() { Title = "Indstillinger", Icon = "settings.png", TargetPage = "MainPage" });
             HamburgerMenu.Add(new MasterMenuItem() { Title = "PopupTest", Icon = "icon.png", TargetPage = "VaccineInfoPage" });
             HamburgerMenu.Add(new MasterMenuItem() { Title = "Unknown", Icon = "icon.png", TargetPage = "Fill" });
         }

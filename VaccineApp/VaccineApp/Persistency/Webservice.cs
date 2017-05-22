@@ -241,7 +241,7 @@ namespace VaccineApp.Persistency
             return null;
         }
 
-        public async Task<VaccineInfo> GetVacInfo(string api_key, int Vac_ID)
+        public async Task<VaccineInfo> GetVacInfo(string api_key, int VacInfo_ID)
         {
             client.BaseAddress = new Uri(ServerUrl);
             client.DefaultRequestHeaders.Clear();
@@ -249,7 +249,7 @@ namespace VaccineApp.Persistency
 
             try
             {
-                var result = client.GetAsync($"GetVacInfo/{api_key}/{Vac_ID}").Result;
+                var result = client.GetAsync($"GetVacInfo/{api_key}/{VacInfo_ID}").Result;
 
                 if (result.IsSuccessStatusCode)
                 {

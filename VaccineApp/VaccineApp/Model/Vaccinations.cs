@@ -25,7 +25,7 @@ namespace VaccineApp.Model
             this.name = name;
             this.injection_month = injectionMonth;
             this.program_id = programId;
-            this.vaccineinfo_id = vaccine_id;
+            this.vaccineinfo_id = vaccineinfo_id;
         }
     }
 }

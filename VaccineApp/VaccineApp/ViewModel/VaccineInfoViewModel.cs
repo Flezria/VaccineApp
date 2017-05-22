@@ -44,13 +44,13 @@ namespace VaccineApp.ViewModel
         {
             if (FrontPageViewModel._vacItemSelected != null)
             {
-                VacInfo = await Services.GetVacInfo((String)Application.Current.Properties["api_key"], FrontPageViewModel._vacItemSelected.vaccine_id);
+                VacInfo = await Services.GetVacInfo((String)Application.Current.Properties["api_key"], FrontPageViewModel._vacItemSelected.vaccineinfo_id);
             }
         }
 
-        private void ClosePopup()
+        private async void ClosePopup()
         {
-            PopupNavigation.PopAllAsync();
+            await PopupNavigation.PopAllAsync();
         }
 
         #region INotifyPropertyChanged
