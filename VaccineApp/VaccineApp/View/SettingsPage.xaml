@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VaccineApp.View.SettingsPage"
+             Title="Indstillinger">
+    <Grid BackgroundColor="#E5E5E5">
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               Grid.ColumnSpan="3"
+               HorizontalOptions="Center"
+               Text="Notifikationer: "
+               TextColor="#016A6F"
+               FontSize="20" />
+        
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               Grid.ColumnSpan="2"
+               HorizontalOptions="Start"
+               Text="E-Mail"
+               FontSize="16"></Label>
+        <Switch Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                HorizontalOptions="End"
+                IsToggled="True" />
+        
+        <Label Grid.Row="2"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+               HorizontalOptions="Start"
+                Text="SMS"
+                FontSize="16"></Label>
+        <Switch Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                HorizontalOptions="End"
+                IsToggled="True" />
+
+
+        <Label Grid.Row="4"
+               Grid.Column="0"
+               Grid.ColumnSpan="3"
+               HorizontalOptions="Center"
+               Text="Slet barn: "
+               TextColor="#016A6F"
+               FontSize="20" />
+            <Picker Grid.Row="5"
+                    Grid.Column="1"
+                    Title="Dine børn"
+                    TextColor="Black" 
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center"
+                    ItemsSource="{Binding ChildList, Mode=TwoWay}"
+                    SelectedIndex="{Binding SelectedIndexChild, Mode=TwoWay}" />
+        <Button Grid.Row="6"
+                Grid.Column="1"
+                HorizontalOptions="Fill"
+                Text="Slet"
+                FontSize="14"
+                BackgroundColor="Tomato"
+                Command="{Binding DeleteChildCommand}"></Button>
+
+    </Grid>
+</ContentPage>

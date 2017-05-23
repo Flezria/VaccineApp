@@ -27,7 +27,7 @@
                Margin="0, 50, 0, 75"
                Grid.ColumnSpan="2"
                Grid.Row="2"
-               VerticalOptions="Center" 
+               VerticalOptions="Center"
                HorizontalOptions="Center">
 
             <Label.FontFamily>

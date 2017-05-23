@@ -150,6 +150,33 @@ namespace VaccineApp.Persistency
             return false;
         }
 
+        public async Task<bool> DeleteChild(int childId, String api_key)
+        {
+            
+            client.BaseAddress = new Uri(ServerUrl);
+            client.DefaultRequestHeaders.Clear();
+
+            try
+            {
+                var result = await client.DeleteAsync($"DeleteChild/{childId}/{api_key}");
+
+                if (result.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                await App.Current.MainPage.DisplayAlert("Internet error", "Kan ikke forbinde til internettet", "OK");
+                Debug.WriteLine(e);
+            }
+            return false;
+        }
+
         public async Task<ObservableCollection<UserChilds>> GetChild(String api_key)
         {
             client.BaseAddress = new Uri(ServerUrl);

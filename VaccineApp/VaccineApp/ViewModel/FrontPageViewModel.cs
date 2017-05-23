@@ -55,7 +55,6 @@ namespace VaccineApp.ViewModel
             get { return _childList; }
             set { _childList = value;
                 OnPropertyChanged(nameof(ChildList));
-                ChildListMethod();
             }
         }
         
@@ -112,31 +111,27 @@ namespace VaccineApp.ViewModel
 
             LoadInCtor();
 
-            MessagingCenter.Subscribe<AddChildViewModel>(this, "update", (sender) => {
+            MessagingCenter.Subscribe<AddChildViewModel>(this, "update", (sender) =>
+            {
                 LoadList();
-                MessageCheck = true;
-                ChildListCount = ChildList.Count() - 1;
+            });
+
+            MessagingCenter.Subscribe<SettingsViewModel>(this, "delete", (sender) =>
+            {
+                LoadList();
             });
         }
 
         #region Setter Methods
-        //Method til ChildList setter
-        private void ChildListMethod()
-        {
-            if ((MessageCheck != true) && (ChildList != null))
-            {
-                SelectedIndexChild = 0;
-            }
-        }
 
         //Method til SelectedIndex setter
         private void SelectedIndexMethod()
         {
-            if (MessageCheck == true)
+
+            if ((ChildList.Count != 0) && (SelectedIndexChild < 0))
             {
-                MessageCheck = false;
-                SelectedIndexChild = ChildListCount;
-            };
+                SelectedIndexChild = 0;
+            }
 
             if ((ChildList.Count != 0) && (SelectedIndexChild != -1))
             {
@@ -158,7 +153,8 @@ namespace VaccineApp.ViewModel
         #region Load Lists Methods
         private async void LoadList()
         {
-                ChildList = await Services.GetChild((String)Application.Current.Properties["api_key"]);   
+            ChildList = await Services.GetChild((String)Application.Current.Properties["api_key"]);
+            SelectedIndexMethod();
         }
 
         private async void LoadDisplayVacInfo()
@@ -186,29 +182,27 @@ namespace VaccineApp.ViewModel
                     await NavService.GotoPageAsync(NavigationService.AvailablePages.AddChildPage);
                     SelectedMenuItem = Filler;
                     break;
-                case "MainPage":
-                    await NavService.GotoPageAsync(NavigationService.AvailablePages.MainPage);
-                    SelectedMenuItem = Filler;
-                    break;
                 case "VaccineInfoPage":
                     await NavService.GotoPageAsync(NavigationService.AvailablePages.VaccineInfoPage);
                     SelectedMenuItem = Filler;
                     break;
-            }
+                case "MainPage":
+                    await NavService.GotoPageAsync(NavigationService.AvailablePages.MainPage);
+                    break;
+                case "SettingsPage":
+                    await NavService.GotoPageAsync(NavigationService.AvailablePages.SettingsPage);
+                    SelectedMenuItem = Filler;
+                    break;
 
-            //For testing properties api_key
-            if (SelectedMenuItem.Title == "Unknown")
-            {
-                Application.Current.Properties.Clear();
             }
         }
 
         private void AddMenuItems()
         {
             HamburgerMenu.Add(new MasterMenuItem() { Title = "Opret barn", Icon = "addChild.png", TargetPage = "AddChildPage" });
-            HamburgerMenu.Add(new MasterMenuItem() { Title = "Indstillinger", Icon = "settings.png", TargetPage = "MainPage" });
-            HamburgerMenu.Add(new MasterMenuItem() { Title = "PopupTest", Icon = "icon.png", TargetPage = "VaccineInfoPage" });
-            HamburgerMenu.Add(new MasterMenuItem() { Title = "Unknown", Icon = "icon.png", TargetPage = "Fill" });
+            HamburgerMenu.Add(new MasterMenuItem() { Title = "Indstillinger", Icon = "settings.png", TargetPage = "SettingsPage" });
+            HamburgerMenu.Add(new MasterMenuItem() { Title = "Historik", Icon = "historik.png", TargetPage = "VaccineInfoPage" });
+            HamburgerMenu.Add(new MasterMenuItem() { Title = "Logud", Icon = "logud.png", TargetPage = "MainPage" });
         }
 
         #endregion

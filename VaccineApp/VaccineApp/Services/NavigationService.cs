@@ -20,6 +20,7 @@ namespace VaccineApp.Services
             AddChildPage,
             MainPage,
             VaccineInfoPage,
+            SettingsPage,
         }
 
         public NavigationService()
@@ -38,13 +39,22 @@ namespace VaccineApp.Services
                     await mdPage.Detail.Navigation.PushAsync(AddChild);
                     break;
                 case AvailablePages.MainPage:
-                    mdPage.IsPresented = false;
-                    await mdPage.Detail.Navigation.PushAsync(new MainPage());
+                    Application.Current.Properties.Clear();
+                    await PopToRoot();
+                    Application.Current.MainPage = new NavigationPage(new MainPage())
+                    {
+                        BarBackgroundColor = Color.FromHex("#016A6F"),
+                    };
                     break;
                 case AvailablePages.VaccineInfoPage:
                     mdPage.IsPresented = false;
-                    PopupPage qrv = new VaccineInfoPage();
-                     await PopupNavigation.PushAsync(qrv);
+                    PopupPage vacInfoPopUp = new VaccineInfoPage();
+                     await PopupNavigation.PushAsync(vacInfoPopUp);
+                    break;
+                case AvailablePages.SettingsPage:
+                    mdPage.IsPresented = false;
+                    var SettingsPage = new SettingsPage();
+                    await mdPage.Detail.Navigation.PushAsync(SettingsPage);
                     break;
                 default:
                     await App.Current.MainPage.DisplayAlert("Error", "Noget gik galt", "ok");

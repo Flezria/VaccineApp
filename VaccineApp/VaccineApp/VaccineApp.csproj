@@ -50,6 +50,7 @@
     <Compile Include="ViewModel\FrontPageViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\VaccineInfoViewModel.cs" />
     <Compile Include="View\AddChildPage.xaml.cs">
       <DependentUpon>AddChildPage.xaml</DependentUpon>
@@ -69,6 +70,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\VaccineInfoPage.xaml.cs">
       <DependentUpon>VaccineInfoPage.xaml</DependentUpon>
@@ -171,6 +175,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\VaccineInfoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -1,25 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace VaccineApp.View
 {
-
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FrontPageMasterMenu : ContentPage
+    public partial class SettingsPage : ContentPage
     {
-        public FrontPageMasterMenu()
+        public SettingsPage()
         {
             InitializeComponent();
 
+            BindingContext = new ViewModel.SettingsViewModel();
         }
     }
 }
