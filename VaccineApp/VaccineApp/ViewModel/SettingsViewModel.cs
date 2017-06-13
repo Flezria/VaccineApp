@@ -66,8 +66,8 @@ namespace VaccineApp.ViewModel
                 if (await Services.DeleteChild(SelectedChildId, (String)Application.Current.Properties["api_key"]))
                 {
                     await App.Current.MainPage.DisplayAlert("Done", "Barn slettet", "OK");
-                    MessagingCenter.Send<SettingsViewModel>(this, "delete");
                     LoadList();
+                    MessagingCenter.Send<SettingsViewModel>(this, "delete");
                 }
             }
         }
@@ -76,7 +76,9 @@ namespace VaccineApp.ViewModel
         {
             if ((ChildList.Count != 0) && (SelectedIndexChild < 0))
             {
-                SelectedIndexChild = 0;
+
+                    SelectedIndexChild = 0;
+
             }
         }
 

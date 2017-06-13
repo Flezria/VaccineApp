@@ -21,6 +21,7 @@ namespace VaccineApp.Services
             MainPage,
             VaccineInfoPage,
             SettingsPage,
+            HistorikPage,
         }
 
         public NavigationService()
@@ -55,6 +56,11 @@ namespace VaccineApp.Services
                     mdPage.IsPresented = false;
                     var SettingsPage = new SettingsPage();
                     await mdPage.Detail.Navigation.PushAsync(SettingsPage);
+                    break;
+                case AvailablePages.HistorikPage:
+                    mdPage.IsPresented = false;
+                    PopupPage HistorikPopup = new HistorikPage();
+                    await PopupNavigation.PushAsync(HistorikPopup);
                     break;
                 default:
                     await App.Current.MainPage.DisplayAlert("Error", "Noget gik galt", "ok");

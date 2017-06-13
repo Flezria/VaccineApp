@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VaccineApp.View.FrontPageDetail"
+             x:Name="PageName"
              xmlns:b="clr-namespace:Behaviors;assembly=BehaviorsLibrary"
              Title="Forside"
              Padding="10"
@@ -12,10 +13,15 @@
             <Frame Padding="10" BackgroundColor="#016A6F">
                 <Label Text="{Binding SelectedChildsName}" FontSize="Medium" TextColor="White" HorizontalOptions="CenterAndExpand"/>
             </Frame>
-            <ListView x:Name="listView" ItemsSource="{Binding VacInfoList}" SelectedItem="{Binding VacItemSelected, Mode=TwoWay}" HorizontalOptions="CenterAndExpand">
+            <ListView x:Name="listView" ItemsSource="{Binding VacProgramList}" SelectedItem="{Binding VacItemSelected, Mode=TwoWay}" HorizontalOptions="CenterAndExpand">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        <ViewCell x:Name="ViewCell">
+                            <ViewCell.ContextActions>
+                                <MenuItem CommandParameter="{Binding Source={x:Reference ViewCell}, Path=BindingContext}" Command="{Binding Path=BindingContext.OnItemTapCommand, Source={x:Reference PageName}}"
+                                          Text="Vaccine fuldført" />
+                            </ViewCell.ContextActions>
+
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />

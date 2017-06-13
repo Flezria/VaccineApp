@@ -48,6 +48,7 @@
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="ViewModel\AddChildViewModel.cs" />
     <Compile Include="ViewModel\FrontPageViewModel.cs" />
+    <Compile Include="ViewModel\HistorikViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
@@ -63,6 +64,9 @@
     </Compile>
     <Compile Include="View\FrontPageMasterMenu.xaml.cs">
       <DependentUpon>FrontPageMasterMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HistorikPage.xaml.cs">
+      <DependentUpon>HistorikPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -181,6 +185,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\SettingsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\HistorikPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -239,7 +239,7 @@ namespace VaccineApp.Persistency
 
         #region Vaccine Services
 
-        public async Task<List<Vaccinations>> GetVacProgram(string api_key, int program_id)
+        public async Task<List<Vaccinations>> GetVacProgram(string api_key, int program_id, int child_id)
         {
             client.BaseAddress = new Uri(ServerUrl);
             client.DefaultRequestHeaders.Clear();
@@ -247,15 +247,43 @@ namespace VaccineApp.Persistency
 
             try
             {
-                var result = client.GetAsync($"GetVacProgram/{api_key}/{program_id}").Result;
+                var result = client.GetAsync($"GetVacProgram/{api_key}/{program_id}/{child_id}").Result;
 
-                if (result.Content != null)
+                if (result.IsSuccessStatusCode)
                 {
                     var VacListAsString = await result.Content.ReadAsStringAsync();
                     var VacListDeserialize = JsonConvert.DeserializeObject<List<Vaccinations>>(VacListAsString);
                     List<Vaccinations> VacList = VacListDeserialize;
 
                     return VacList;
+                }
+            }
+            catch (Exception e)
+            {
+                await App.Current.MainPage.DisplayAlert("Internet error", "Kan ikke forbinde til internettet", "OK");
+                Debug.WriteLine(e);
+            }
+
+            return null;
+        }
+
+        public async Task<List<Vaccinations>> GetVacHistorik(string api_key, int program_id, int child_id)
+        {
+            client.BaseAddress = new Uri(ServerUrl);
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            try
+            {
+                var result = client.GetAsync($"GetVacHistorik/{api_key}/{program_id}/{child_id}").Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    var VacHistorikAsString = await result.Content.ReadAsStringAsync();
+                    var VacHistorikDeserialize = JsonConvert.DeserializeObject<List<Vaccinations>>(VacHistorikAsString);
+                    List<Vaccinations> VacHistorik = VacHistorikDeserialize;
+
+                    return VacHistorik;
                 }
             }
             catch (Exception e)
@@ -295,9 +323,41 @@ namespace VaccineApp.Persistency
 
             return null;
         }
-            #endregion
+        #endregion
 
-     }
+        #region Vaccination_check Services
+
+        public async Task<bool> UpdateVacAsDone(String api_key, int vac_id, int child_id)
+        {
+            client.BaseAddress = new Uri(ServerUrl);
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            try
+            {
+                var result = client.GetAsync($"VacDone/{api_key}/{vac_id}/{child_id}").Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                await App.Current.MainPage.DisplayAlert("Internet error", "Kan ikke forbinde til internettet", "OK");
+                Debug.WriteLine(e);
+            }
+
+            return false;
+
+        }
+
+        #endregion
+    }
 }
 
 

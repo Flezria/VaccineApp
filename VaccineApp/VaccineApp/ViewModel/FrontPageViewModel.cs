@@ -11,6 +11,7 @@ using VaccineApp.Model;
 using VaccineApp.Services;
 using System.Collections.ObjectModel;
 using VaccineApp.Persistency;
+using Xamarin.Forms.Xaml;
 
 namespace VaccineApp.ViewModel
 {
@@ -24,6 +25,7 @@ namespace VaccineApp.ViewModel
         public MasterMenuItem Filler { get; set; }
         public Webservice Services { get; set; }
         public ICommand OnItemTapCommand { get; set; }
+        public static UserChilds CurrentChild { get; set; }
 
         public bool MessageCheck { get; set; }
         public int ChildListCount { get; set; }
@@ -68,14 +70,14 @@ namespace VaccineApp.ViewModel
             }
         }
 
-        private List<Vaccinations> _vacInfoList;
-        public List<Vaccinations> VacInfoList
+        private ObservableCollection<Vaccinations> _vacProgramList;
+        public ObservableCollection<Vaccinations> VacProgramList
         {
-            get { return _vacInfoList; }
+            get { return _vacProgramList; }
             set
             {
-                _vacInfoList = value;
-                OnPropertyChanged(nameof(VacInfoList));
+                _vacProgramList = value;
+                OnPropertyChanged(nameof(VacProgramList));
             }
         }
 
@@ -95,7 +97,7 @@ namespace VaccineApp.ViewModel
 
         public FrontPageViewModel()
         {
-            MessageCheck = false;
+            OnItemTapCommand = new Command<Vaccinations>(OnItemTapMethod);
 
             SelectedMenuItem = new MasterMenuItem();
 
@@ -109,7 +111,7 @@ namespace VaccineApp.ViewModel
             HamburgerMenu = new List<MasterMenuItem>();
             AddMenuItems();
 
-            LoadInCtor();
+            LoadList();
 
             MessagingCenter.Subscribe<AddChildViewModel>(this, "update", (sender) =>
             {
@@ -119,6 +121,7 @@ namespace VaccineApp.ViewModel
             MessagingCenter.Subscribe<SettingsViewModel>(this, "delete", (sender) =>
             {
                 LoadList();
+                DeleteLastEntry();
             });
         }
 
@@ -128,15 +131,16 @@ namespace VaccineApp.ViewModel
         private void SelectedIndexMethod()
         {
 
-            if ((ChildList.Count != 0) && (SelectedIndexChild < 0))
+            if ((ChildList.Count != 0) && (SelectedIndexChild < 0) || (ChildList.Count - 1 < SelectedIndexChild))
             {
-                SelectedIndexChild = 0;
+                    SelectedIndexChild = 0;
             }
 
             if ((ChildList.Count != 0) && (SelectedIndexChild != -1))
             {
-                LoadDisplayVacInfo();
-                SelectedChildsName = "Vaccine program for " + ChildList[SelectedIndexChild].name;
+                LoadDisplayVacProgram();
+                CurrentChild = ChildList[SelectedIndexChild];
+                SelectedChildsName = "Vaccine program for " + CurrentChild.name;
             }
         }
         //ItemSelect method
@@ -153,25 +157,51 @@ namespace VaccineApp.ViewModel
         #region Load Lists Methods
         private async void LoadList()
         {
-            ChildList = await Services.GetChild((String)Application.Current.Properties["api_key"]);
-            SelectedIndexMethod();
-        }
-
-        private async void LoadDisplayVacInfo()
-        {    
-            VacInfoList = await Services.GetVacProgram((String)Application.Current.Properties["api_key"], ChildList[SelectedIndexChild].program_id);            
-        }
-
-        private async void LoadInCtor()
-        {
             if (await Services.CheckForChild((String)Application.Current.Properties["api_key"]) == true)
             {
-                LoadList();
-                LoadDisplayVacInfo();
+                ChildList = await Services.GetChild((String)Application.Current.Properties["api_key"]);
+                SelectedIndexMethod();
             }
         }
 
+        private async void DeleteLastEntry()
+        {
+            if (await Services.CheckForChild((String)Application.Current.Properties["api_key"]) == false)
+            {
+                if (ChildList.Count == 1)
+                {
+                    ChildList.Clear();
+                    VacProgramList.Clear();
+                    SelectedChildsName = "Opret et barn for at se vaccineprogram";
+                }
+            }
+        }
+
+        private async void LoadDisplayVacProgram()
+        {
+            //VacProgramList = new ObservableCollection<Vaccinations>(await Services.GetVacProgram((String)Application.Current.Properties["api_key"], ChildList[SelectedIndexChild].program_id, ChildList[SelectedIndexChild].child_id));
+
+            VacProgramList = new ObservableCollection<Vaccinations>(await Services.GetVacProgram((String)Application.Current.Properties["api_key"], ChildList[SelectedIndexChild].program_id, ChildList[SelectedIndexChild].child_id));
+        }
+
         #endregion
+
+        private async void OnItemTapMethod(Vaccinations VacForHistorik)
+        {
+            if (VacForHistorik != null)
+            {
+                if (await Services.UpdateVacAsDone((String) Application.Current.Properties["api_key"],
+                    VacForHistorik.vaccine_id, CurrentChild.child_id))
+                {
+                    LoadDisplayVacProgram();
+                }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("Error", "Noget gik galt", "OK");
+
+                }
+            }
+        }
 
         #region Navigation
         private async void DoNavigation()
@@ -193,6 +223,10 @@ namespace VaccineApp.ViewModel
                     await NavService.GotoPageAsync(NavigationService.AvailablePages.SettingsPage);
                     SelectedMenuItem = Filler;
                     break;
+                case "HistorikPage":
+                    await NavService.GotoPageAsync(NavigationService.AvailablePages.HistorikPage);
+                    SelectedMenuItem = Filler;
+                    break;
 
             }
         }
@@ -201,7 +235,7 @@ namespace VaccineApp.ViewModel
         {
             HamburgerMenu.Add(new MasterMenuItem() { Title = "Opret barn", Icon = "addChild.png", TargetPage = "AddChildPage" });
             HamburgerMenu.Add(new MasterMenuItem() { Title = "Indstillinger", Icon = "settings.png", TargetPage = "SettingsPage" });
-            HamburgerMenu.Add(new MasterMenuItem() { Title = "Historik", Icon = "historik.png", TargetPage = "VaccineInfoPage" });
+            HamburgerMenu.Add(new MasterMenuItem() { Title = "Historik", Icon = "historik.png", TargetPage = "HistorikPage" });
             HamburgerMenu.Add(new MasterMenuItem() { Title = "Logud", Icon = "logud.png", TargetPage = "MainPage" });
         }
 
